@@ -19,7 +19,7 @@ public class ParkingLot {
         if(listOfParkingLots.contains(new Vehicle(vehicleNumber)))
             throw new ParkingLotException("Vehicle Already Pressent"
                     ,ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN);
-        if(listOfParkingLots.size()==sizeOfParkingLot)
+        if(this.isFull())
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
         vehicle=new Vehicle(vehicleNumber);
         listOfParkingLots.add(vehicle);
@@ -42,7 +42,9 @@ public class ParkingLot {
         return (!(listOfParkingLots.contains(new Vehicle(vehicleNumber))));
     }
 
-
+    public boolean isFull(){
+        return listOfParkingLots.size()==sizeOfParkingLot;
+    }
 
 
 

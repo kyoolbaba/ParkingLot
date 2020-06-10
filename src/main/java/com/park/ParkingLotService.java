@@ -15,4 +15,9 @@ public class ParkingLotService {
     public boolean unparkTheVehicle(String vehicleNumber) throws ParkingLotException {
     return parkingLot.removeVehicle(vehicleNumber);
     }
+
+    public boolean checkAvailability(){
+        return (!(parkingLot.isFull()));
+    }
+
 }

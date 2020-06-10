@@ -83,6 +83,20 @@ public class ParkingLotServiceTest {
         }
     }
 
-    
+    @Test
+    public void givenVehicle_whenParkingLotFull_shouldThrowException() {
+        try{
+            ParkingLotService parkingLotService = new ParkingLotService(2);
+            boolean park=parkingLotService.parkTheVehicle("KA04HB1234");
+            boolean park1=parkingLotService.parkTheVehicle("KA03HB1234");
+            boolean checkAvailability=parkingLotService.checkAvailability();
+            Assert.assertFalse(checkAvailability);
+        }catch(ParkingLotException e){
+            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
+        }
+    }
+
+
+
 
 }
