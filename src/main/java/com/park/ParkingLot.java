@@ -23,6 +23,7 @@ public class ParkingLot {
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
         vehicle=new Vehicle(vehicleNumber);
         listOfParkingLots.add(vehicle);
+        this.redirectStaff();
         return listOfParkingLots.contains(new Vehicle(vehicleNumber));
     }
 
@@ -43,6 +44,10 @@ public class ParkingLot {
     }
 
     public boolean isFull(){
+        return listOfParkingLots.size()==sizeOfParkingLot;
+    }
+
+    public boolean redirectStaff(){
         return listOfParkingLots.size()==sizeOfParkingLot;
     }
 

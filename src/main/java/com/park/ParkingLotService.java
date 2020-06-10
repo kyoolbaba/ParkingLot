@@ -20,4 +20,8 @@ public class ParkingLotService {
         return (!(parkingLot.isFull()));
     }
 
+    public boolean checkStaffRedirection(){
+        return parkingLot.redirectStaff();
+    }
+
 }
