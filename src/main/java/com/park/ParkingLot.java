@@ -5,43 +5,36 @@ import java.util.List;
 
 public class ParkingLot {
     private int sizeOfParkingLot;
-    Vehicle vehicle;
     List<Vehicle> listOfParkingLots = new ArrayList();
 
     public ParkingLot(int sizeOfParkingLot) {
         this.sizeOfParkingLot = sizeOfParkingLot;
     }
 
-    public boolean addVehicle(String vehicleNumber) throws ParkingLotException {
-        if(vehicleNumber==null||vehicleNumber=="")
+    public boolean parkTheVehicle( Vehicle vehicle) throws ParkingLotException {
+        if(vehicle==null||vehicle.getVehicleNumber()==""||vehicle.getVehicleNumber()==null)
             throw new ParkingLotException("No Value Entered",
                     ParkingLotException.ExceptionType.INCOMPLETE_DETAILS);
-        if(listOfParkingLots.contains(new Vehicle(vehicleNumber)))
+        if(listOfParkingLots.contains(vehicle))
             throw new ParkingLotException("Vehicle Already Pressent"
                     ,ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN);
         if(this.isFull())
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
-        vehicle=new Vehicle(vehicleNumber);
         listOfParkingLots.add(vehicle);
         this.redirectStaff();
-        return listOfParkingLots.contains(new Vehicle(vehicleNumber));
+        return listOfParkingLots.contains(vehicle);
     }
 
-    public boolean removeVehicle(String vehicleNumber) throws ParkingLotException {
-        if(vehicleNumber==null||vehicleNumber=="")
+    public boolean unparkTheVehicle(Vehicle vehicle) throws ParkingLotException {
+        if(vehicle==null|| vehicle.getVehicleNumber()==""||vehicle.getVehicleNumber()==null)
             throw new ParkingLotException("No Value Entered",
                     ParkingLotException.ExceptionType.INCOMPLETE_DETAILS);
-        if(!(listOfParkingLots.contains(new Vehicle(vehicleNumber))))
+        if(!(listOfParkingLots.contains(vehicle)))
             throw new ParkingLotException("Vehicle Not Present"
                     ,ParkingLotException.ExceptionType.VEHICLE_NOT_PRESENT);
-        for(Vehicle vehicle: listOfParkingLots){
-            if(vehicle.getVehicleNumber()==vehicleNumber){
-                listOfParkingLots.remove(vehicle);
-                break;
+        listOfParkingLots.remove(vehicle);
+        return (!(listOfParkingLots.contains(vehicle)));
             }
-        }
-        return (!(listOfParkingLots.contains(new Vehicle(vehicleNumber))));
-    }
 
     public boolean isFull(){
         return listOfParkingLots.size()==sizeOfParkingLot;
@@ -50,7 +43,5 @@ public class ParkingLot {
     public boolean redirectStaff(){
         return listOfParkingLots.size()==sizeOfParkingLot;
     }
-
-
 
 }

@@ -9,7 +9,7 @@ public class ParkingLotServiceTest {
     public void givenPersonVehicle_whenParked_shouldReturnTrue() {
         try {
             ParkingLotService parkingLotService = new ParkingLotService(50);
-            boolean park = parkingLotService.parkTheVehicle("KA04HB124");
+            boolean park = parkingLotService.entry(new Vehicle("KA04HB124"));
             Assert.assertTrue(park);
         }catch(ParkingLotException e){}
     }
@@ -18,7 +18,7 @@ public class ParkingLotServiceTest {
     public void givenPersonVehicleAsNull_whenParked_shouldReturnTrue() {
         try{
             ParkingLotService parkingLotService = new ParkingLotService(50);
-            boolean park=parkingLotService.parkTheVehicle(null);
+            boolean park=parkingLotService.entry(null);
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
         }
@@ -28,8 +28,8 @@ public class ParkingLotServiceTest {
     public void givenSameVehicleTwice_whenParked_shouldReturnTrue() {
         try{
             ParkingLotService parkingLotService = new ParkingLotService(50);
-            boolean park=parkingLotService.parkTheVehicle("KA04HB1234");
-            boolean park1=parkingLotService.parkTheVehicle("KA04HB1234");
+            boolean park=parkingLotService.entry(new Vehicle("KA04HB1234"));
+            boolean park1=parkingLotService.entry(new Vehicle("KA04HB1234"));
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN,e.type);
         }
@@ -39,9 +39,9 @@ public class ParkingLotServiceTest {
     public void givenVehicle_whenUnParked_shouldReturnTrue() {
         try{
             ParkingLotService parkingLotService = new ParkingLotService(50);
-            boolean park=parkingLotService.parkTheVehicle("KA04HB1234");
-            boolean park1=parkingLotService.parkTheVehicle("KA03HB1234");
-            boolean unpark=parkingLotService.unparkTheVehicle("KA03HB1234");
+            boolean park=parkingLotService.entry(new Vehicle("KA04HB1234"));
+            boolean park1=parkingLotService.entry(new Vehicle("KA03HB1234"));
+            boolean unpark=parkingLotService.exit(new Vehicle("KA03HB1234"));
             Assert.assertTrue(unpark);
         }catch(ParkingLotException e){
         }
@@ -51,9 +51,9 @@ public class ParkingLotServiceTest {
     public void givenVehicleNotPresent_whenUnParked_shouldThrowException() {
         try{
             ParkingLotService parkingLotService = new ParkingLotService(50);
-            boolean park=parkingLotService.parkTheVehicle("KA04HB1234");
-            boolean park1=parkingLotService.parkTheVehicle("KA03HB1234");
-            boolean unpark=parkingLotService.unparkTheVehicle("KA03HB1004");
+            boolean park=parkingLotService.entry(new Vehicle("KA04HB1234"));
+            boolean park1=parkingLotService.entry(new Vehicle("KA03HB1234"));
+            boolean unpark=parkingLotService.exit(new Vehicle("KA03HB1004"));
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.VEHICLE_NOT_PRESENT,e.type);
         }
@@ -63,9 +63,9 @@ public class ParkingLotServiceTest {
     public void givenVehicleAsEmpty_whenUnParked_shouldThrowException() {
         try{
             ParkingLotService parkingLotService = new ParkingLotService(50);
-            boolean park=parkingLotService.parkTheVehicle("KA04HB1234");
-            boolean park1=parkingLotService.parkTheVehicle("KA03HB1234");
-            boolean unpark=parkingLotService.unparkTheVehicle("");
+            boolean park=parkingLotService.entry(new Vehicle("KA04HB1234"));
+            boolean park1=parkingLotService.entry(new Vehicle("KA03HB1234"));
+            boolean unpark=parkingLotService.exit(new Vehicle(""));
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
         }
@@ -75,9 +75,9 @@ public class ParkingLotServiceTest {
     public void givenVehicleAsNull_whenUnParked_shouldThrowException() {
         try{
             ParkingLotService parkingLotService = new ParkingLotService(50);
-            boolean park=parkingLotService.parkTheVehicle("KA04HB1234");
-            boolean park1=parkingLotService.parkTheVehicle("KA03HB1234");
-            boolean unpark=parkingLotService.unparkTheVehicle(null);
+            boolean park=parkingLotService.entry(new Vehicle("KA04HB1234"));
+            boolean park1=parkingLotService.entry(new Vehicle("KA03HB1234"));
+            boolean unpark=parkingLotService.exit(null);
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
         }
@@ -87,8 +87,8 @@ public class ParkingLotServiceTest {
     public void givenVehicle_whenParkingLotFull_shouldThrowException() {
         try{
             ParkingLotService parkingLotService = new ParkingLotService(2);
-            boolean park=parkingLotService.parkTheVehicle("KA04HB1234");
-            boolean park1=parkingLotService.parkTheVehicle("KA03HB1234");
+            boolean park=parkingLotService.entry(new Vehicle("KA04HB1234"));
+            boolean park1=parkingLotService.entry(new Vehicle("KA03HB1234"));
             boolean checkAvailability=parkingLotService.checkAvailability();
             Assert.assertFalse(checkAvailability);
         }catch(ParkingLotException e){
@@ -97,13 +97,26 @@ public class ParkingLotServiceTest {
     }
 
     @Test
-    public void givenVehicle_whenParkingLotFull_shouldRedirectStaff() {
+    public void givenVehicle_whenParkingLotFull_shouldReturnRedirectStaffAsTrue() {
         try{
             ParkingLotService parkingLotService = new ParkingLotService(2);
-            boolean park=parkingLotService.parkTheVehicle("KA04HB1234");
-            boolean park1=parkingLotService.parkTheVehicle("KA03HB1234");
+            boolean park=parkingLotService.entry(new Vehicle("KA04HB1234"));
+            boolean park1=parkingLotService.entry(new Vehicle("KA03HB1234"));
             boolean staffStatus=parkingLotService.checkStaffRedirection();
             Assert.assertTrue(staffStatus);
+        }catch(ParkingLotException e){
+            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
+        }
+    }
+
+    @Test
+    public void givenVehicle_whenParkingLotNotFull_shouldReturnRedirectStaffAsFalse() {
+        try{
+            ParkingLotService parkingLotService = new ParkingLotService(3);
+            boolean park=parkingLotService.entry(new Vehicle("KA04HB1234"));
+            boolean park1=parkingLotService.entry(new Vehicle("KA03HB1234"));
+            boolean staffStatus=parkingLotService.checkStaffRedirection();
+            Assert.assertFalse(staffStatus);
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
         }
