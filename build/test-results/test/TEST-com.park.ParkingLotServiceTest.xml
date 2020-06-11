@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.park.ParkingLotServiceTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2020-06-11T12:24:41" hostname="KYOOLBABA" time="0.027">
+<testsuite name="com.park.ParkingLotServiceTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2020-06-11T15:31:53" hostname="KYOOLBABA" time="0.027">
   <properties/>
-  <testcase name="givenVehicleAsEmpty_whenUnParked_shouldThrowException" classname="com.park.ParkingLotServiceTest" time="0.005"/>
-  <testcase name="givenVehicle_whenParkingLotFull_shouldReturnRedirectStaffAsTrue" classname="com.park.ParkingLotServiceTest" time="0.001"/>
-  <testcase name="givenVehicle_whenParkingLotNotFull_shouldReturnRedirectStaffAsFalse" classname="com.park.ParkingLotServiceTest" time="0.001"/>
-  <testcase name="givenVehicle_whenUnParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenPersonVehicleAsNull_whenParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenSameVehicleTwice_whenParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.001"/>
-  <testcase name="givenOneVehicle_whenParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.001"/>
-  <testcase name="givenVehicle_whenParkingLotFull_shouldThrowException" classname="com.park.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenOneVehicle_whenParked_shouldReturnCharges" classname="com.park.ParkingLotServiceTest" time="0.008"/>
+  <testcase name="givenTwoVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnLastLotNumber" classname="com.park.ParkingLotServiceTest" time="0.002"/>
+  <testcase name="givenVehicle_whenUnParked_shouldReturnItsLotNumber" classname="com.park.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenVehicleAsEmpty_whenUnParked_shouldThrowException" classname="com.park.ParkingLotServiceTest" time="0.002"/>
+  <testcase name="givenVehicle_whenParkingLotNotFull_shouldReturnOccupiedLotsPositiveTesting" classname="com.park.ParkingLotServiceTest" time="0.001"/>
+  <testcase name="givenVehicle_whenParkingLotFull_shouldReturnAvailabilityAsFalse" classname="com.park.ParkingLotServiceTest" time="0.002"/>
+  <testcase name="givenVehicle_whenParkingLotNotFull_shouldReturnOccupiedLotsNegativeTesting" classname="com.park.ParkingLotServiceTest" time="0.001"/>
+  <testcase name="givenVehicle_whenParkingLotFull_shouldReturnAvailabilityAsTrue" classname="com.park.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenPersonVehicleAsNull_whenParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.001"/>
+  <testcase name="givenSameVehicleTwice_whenParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.0"/>
   <testcase name="givenVehicleAsNull_whenUnParked_shouldThrowException" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenVehicleNotPresent_whenUnParked_shouldThrowException" classname="com.park.ParkingLotServiceTest" time="0.0"/>
+  <testcase name="givenVehicleNotPresent_whenUnParked_shouldThrowException" classname="com.park.ParkingLotServiceTest" time="0.002"/>
   <testcase name="givenTwoVehicle_whenParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.001"/>
-  <testcase name="givenTwoVehicle_whenRemovingFirstVehicleAndAddingANotherVehicle_shouldLotNumber" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenTwoVehicle_whenRemovingFirstVehicleAndAddingAnotherVehicle_shouldLotNumber" classname="com.park.ParkingLotServiceTest" time="0.002"/>
+  <testcase name="givenVehicle_whenParkingLotIsFullParkingAnotherVehicle_shouldThrowParkingFullException" classname="com.park.ParkingLotServiceTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

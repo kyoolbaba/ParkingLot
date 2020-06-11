@@ -5,8 +5,27 @@ import java.util.Objects;
 public class Vehicle {
     private String vehicleNumber;
     private int lotNumber;
+    private double charges;
+    private int noOfDays;
 
-    public Vehicle(  String vehicleNumber) {
+    public void setCharges(double charges) {
+        this.charges = charges;
+    }
+
+    public int getNoOfDays() {
+        return noOfDays;
+    }
+
+    public double getCharges() {
+        return charges;
+    }
+
+    public Vehicle(String vehicleNumber, int noOfDays) {
+        this.vehicleNumber = vehicleNumber;
+        this.noOfDays = noOfDays;
+    }
+
+    public Vehicle(String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
     }
 

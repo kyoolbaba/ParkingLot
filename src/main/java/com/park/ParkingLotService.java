@@ -8,12 +8,16 @@ public class ParkingLotService {
         parkingLot=new ParkingLot(sizeOfParkingLot);
     }
 
-    public int entry(Vehicle vehicle ) throws ParkingLotException {
+    public double entry(Vehicle vehicle ) throws ParkingLotException {
         return parkingLot.parkTheVehicle(vehicle);
     }
 
-    public boolean exit(Vehicle vehicle) throws ParkingLotException {
+    public int exit(Vehicle vehicle) throws ParkingLotException {
     return parkingLot.unparkTheVehicle(vehicle);
+    }
+
+    public int getNumberOfOccupiedLots(){
+        return parkingLot.getOccupiedLots();
     }
 
     public boolean checkAvailability(){

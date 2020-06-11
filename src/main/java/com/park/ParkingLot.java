@@ -15,7 +15,7 @@ public class ParkingLot {
         lots=new int[sizeOfParkingLot];
     }
 
-    public int parkTheVehicle( Vehicle vehicle) throws ParkingLotException {
+    public double parkTheVehicle(Vehicle vehicle) throws ParkingLotException {
         if(vehicle==null||vehicle.getVehicleNumber()==""||vehicle.getVehicleNumber()==null)
             throw new ParkingLotException("No Value Entered",
                     ParkingLotException.ExceptionType.INCOMPLETE_DETAILS);
@@ -30,10 +30,10 @@ public class ParkingLot {
         }
         parkingLotOwner.assignLotNumber(lots,vehicle);
         listOfParkingLots.add(vehicle);
-        return vehicle.getLotNumber();
+        return vehicle.getCharges();
     }
 
-    public boolean unparkTheVehicle(Vehicle vehicle) throws ParkingLotException {
+    public int unparkTheVehicle(Vehicle vehicle) throws ParkingLotException {
         if(vehicle==null|| vehicle.getVehicleNumber()==""||vehicle.getVehicleNumber()==null)
             throw new ParkingLotException("No Value Entered",
                     ParkingLotException.ExceptionType.INCOMPLETE_DETAILS);
@@ -44,15 +44,16 @@ public class ParkingLot {
             this.sendStatusToParkingOwner();
             this.redirectStaff();
         }
+        int lotNumber=0;
         for(Vehicle vehicles:listOfParkingLots){
             if(vehicles.equals(vehicle)){
+                lotNumber=vehicles.getLotNumber();
                 lots[vehicles.getLotNumber()-1]=0;
                 listOfParkingLots.remove(vehicles);
                 break;
             }
         }
-
-        return (!(listOfParkingLots.contains(vehicle)));
+        return lotNumber;
     }
 
     public int getOccupiedLots(){
