@@ -8,7 +8,7 @@ public class ParkingLotService {
         parkingLot=new ParkingLot(sizeOfParkingLot);
     }
 
-    public boolean entry(Vehicle vehicle ) throws ParkingLotException {
+    public int entry(Vehicle vehicle ) throws ParkingLotException {
         return parkingLot.parkTheVehicle(vehicle);
     }
 
@@ -18,10 +18,6 @@ public class ParkingLotService {
 
     public boolean checkAvailability(){
         return (!(parkingLot.isFull()));
-    }
-
-    public boolean checkStaffRedirection(){
-        return parkingLot.redirectStaff();
     }
 
 }

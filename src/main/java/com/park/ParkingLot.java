@@ -5,13 +5,17 @@ import java.util.List;
 
 public class ParkingLot {
     private int sizeOfParkingLot;
+    ParkingLotOwner parkingLotOwner;
     List<Vehicle> listOfParkingLots = new ArrayList();
+    int[] lots;
 
     public ParkingLot(int sizeOfParkingLot) {
         this.sizeOfParkingLot = sizeOfParkingLot;
+        parkingLotOwner=new ParkingLotOwner();
+        lots=new int[sizeOfParkingLot];
     }
 
-    public boolean parkTheVehicle( Vehicle vehicle) throws ParkingLotException {
+    public int parkTheVehicle( Vehicle vehicle) throws ParkingLotException {
         if(vehicle==null||vehicle.getVehicleNumber()==""||vehicle.getVehicleNumber()==null)
             throw new ParkingLotException("No Value Entered",
                     ParkingLotException.ExceptionType.INCOMPLETE_DETAILS);
@@ -20,9 +24,13 @@ public class ParkingLot {
                     ,ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN);
         if(this.isFull())
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
+        if(listOfParkingLots.size()+1==sizeOfParkingLot) {
+            this.sendStatusToParkingOwner();
+            this.redirectStaff();
+        }
+        parkingLotOwner.assignLotNumber(lots,vehicle);
         listOfParkingLots.add(vehicle);
-        this.redirectStaff();
-        return listOfParkingLots.contains(vehicle);
+        return vehicle.getLotNumber();
     }
 
     public boolean unparkTheVehicle(Vehicle vehicle) throws ParkingLotException {
@@ -32,16 +40,35 @@ public class ParkingLot {
         if(!(listOfParkingLots.contains(vehicle)))
             throw new ParkingLotException("Vehicle Not Present"
                     ,ParkingLotException.ExceptionType.VEHICLE_NOT_PRESENT);
-        listOfParkingLots.remove(vehicle);
-        return (!(listOfParkingLots.contains(vehicle)));
+        if(listOfParkingLots.size()==sizeOfParkingLot) {
+            this.sendStatusToParkingOwner();
+            this.redirectStaff();
+        }
+        for(Vehicle vehicles:listOfParkingLots){
+            if(vehicles.equals(vehicle)){
+                lots[vehicles.getLotNumber()-1]=0;
+                listOfParkingLots.remove(vehicles);
+                break;
             }
+        }
+
+        return (!(listOfParkingLots.contains(vehicle)));
+    }
+
+    public int getOccupiedLots(){
+        return listOfParkingLots.size();
+    }
 
     public boolean isFull(){
         return listOfParkingLots.size()==sizeOfParkingLot;
     }
 
-    public boolean redirectStaff(){
-        return listOfParkingLots.size()==sizeOfParkingLot;
+    public ParkingLotOwner sendStatusToParkingOwner(){
+          return new ParkingLotOwner(this.isFull());
+    }
+
+    public AirportSecurity redirectStaff(){
+        return new AirportSecurity(!isFull());
     }
 
 }

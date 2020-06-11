@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Vehicle {
     private String vehicleNumber;
+    private int lotNumber;
 
     public Vehicle(  String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
@@ -11,6 +12,14 @@ public class Vehicle {
 
     public String getVehicleNumber() {
         return vehicleNumber;
+    }
+
+    public int getLotNumber() {
+        return lotNumber;
+    }
+
+    public void setLotNumber(int lotNumber) {
+        this.lotNumber = lotNumber;
     }
 
     @Override
