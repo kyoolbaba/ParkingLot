@@ -4,10 +4,19 @@ import java.util.Objects;
 
 public class Vehicle {
     private String vehicleNumber;
-    private int lotNumber;
+    private int slotNumber;
     private double charges;
     private int noOfDays;
     private boolean handicapped;
+    private int lotNumber;
+
+    public int getLotNumber() {
+        return lotNumber;
+    }
+
+    public void setLotNumber(int lotNumber) {
+        this.lotNumber = lotNumber;
+    }
 
     public boolean isHandicapped() {
         return handicapped;
@@ -39,12 +48,12 @@ public class Vehicle {
         return vehicleNumber;
     }
 
-    public int getLotNumber() {
-        return lotNumber;
+    public int getSlotNumber() {
+        return slotNumber;
     }
 
-    public void setLotNumber(int lotNumber) {
-        this.lotNumber = lotNumber;
+    public void setSlotNumber(int slotNumber) {
+        this.slotNumber = slotNumber;
     }
 
     @Override

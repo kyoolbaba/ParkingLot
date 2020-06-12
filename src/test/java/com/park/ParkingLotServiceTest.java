@@ -3,12 +3,27 @@ package com.park;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParkingLotServiceTest {
 
     @Test
     public void givenOneVehicle_whenParked_shouldReturnCharges() {
         try {
-            ParkingLotService parkingLotService = new ParkingLotService(50);
+            List<ParkingLot> listOfParkingLots = new ArrayList();
+            ParkingLot lot1=new ParkingLot(2);
+            lot1.listOfParkingLots.add(new Vehicle("KA04HB1234"));
+            lot1.listOfParkingLots.add(new Vehicle("KA04HB134"));
+            ParkingLot lot2=new ParkingLot(4);
+            lot2.listOfParkingLots.add(new Vehicle("KA04HB134"));
+            lot2.listOfParkingLots.add(new Vehicle("KA04HB13"));
+            lot2.listOfParkingLots.add(new Vehicle("KA04HB163"));
+            ParkingLot lot3=new ParkingLot(4);
+            lot3.listOfParkingLots.add(new Vehicle("KA04HB1134"));
+            lot3.listOfParkingLots.add(new Vehicle("KA04PB134"));
+            lot3.listOfParkingLots.add(new Vehicle("KA04HB1663"));
+            ParkingLotService parkingLotService=new ParkingLotService(listOfParkingLots);
             double charges = parkingLotService.entry(new Vehicle("KA04HB124",3,false));
             Assert.assertEquals(30.0,charges,0.5);
         }catch(ParkingLotException e){}

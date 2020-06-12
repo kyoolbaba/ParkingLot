@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.park.ParkingRepositoryTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2020-06-12T18:38:27" hostname="KYOOLBABA" time="0.022">
+  <properties/>
+  <testcase name="givenListOfParkingLots_whenParking_ShouldReturnLotTest2NegativeTesting" classname="com.park.ParkingRepositoryTest" time="0.004"/>
+  <testcase name="givenListOfParkingLots_whenParking_ShouldReturnLotTest1PositiveTesting" classname="com.park.ParkingRepositoryTest" time="0.001"/>
+  <testcase name="givenListOfParkingLots_whenParking_ShouldReturnLotTest1NegativeTesting" classname="com.park.ParkingRepositoryTest" time="0.0"/>
+  <testcase name="givenListOfParkingLots_whenParkedSameCarTwice_ShouldReturnTruePositiveTesting" classname="com.park.ParkingRepositoryTest" time="0.01"/>
+  <testcase name="givenListOfParkingLots_whenParkedSameCarTwice_ShouldReturnTrueNegativeTesting" classname="com.park.ParkingRepositoryTest" time="0.0"/>
+  <testcase name="givenListOfParkingLots_whenParkingIsFull_ShouldReturnTruePositiveTesting" classname="com.park.ParkingRepositoryTest" time="0.003"/>
+  <testcase name="givenListOfParkingLots_whenParkingIsFull_ShouldReturnTrueNegativeTesting" classname="com.park.ParkingRepositoryTest" time="0.0"/>
+  <testcase name="givenListOfParkingLots_whenParking_ShouldReturnLotTest2PositiveTesting" classname="com.park.ParkingRepositoryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

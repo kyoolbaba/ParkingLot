@@ -13,19 +13,20 @@ public class ParkingLotOwner {
         parkingAtttendent=new ParkingAtttendent();
     }
 
-    public void assignLotNumber(int[] lots, Vehicle vehicle){
+    public void assignLotNumber(int[] lots, Vehicle vehicle,int lotNumber){
         int i;
         for( i=lots.length-1;i>=0;i--){
             if(lots[i]==0){
-                if(vehicle.isHandicapped()==false){
-                vehicle.setLotNumber(i+1);
+                vehicle.setSlotNumber(Integer.toString(lotNumber)+1);
                 vehicle.setCharges(vehicle.getNoOfDays()*PARKING_CHARGES_PER_DAY);
-                parkingAtttendent.lotNumber(vehicle.getLotNumber());
+                parkingAtttendent.lotNumber(vehicle.getSlotNumber());
                 lots[i] =1;
+
                 break;
-                }
+
             }
         }
+
     }
 
 
