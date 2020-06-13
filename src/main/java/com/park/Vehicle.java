@@ -17,7 +17,7 @@ public class Vehicle {
         this.lotNumber = lotNumber;
     }
 
-    public Driver isHandicapped() {
+    public Driver getDriver() {
         return handicapped;
     }
 
@@ -35,7 +35,6 @@ public class Vehicle {
 
     public Vehicle(String vehicleNumber, Driver handicapped) {
         this.vehicleNumber = vehicleNumber;
-        this.noOfDays = noOfDays;
         this.handicapped = handicapped;
     }
 

@@ -20,10 +20,29 @@ public class ParkingLotServiceTest {
             parkingLots.add(lot2);
             parkingLots.add(lot3);
             ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
-            parkingLotService.entry(new Vehicle("KA04HB124"));
-            parkingLotService.entry(new Vehicle("KA04HB1024"));
+            parkingLotService.entry(new Vehicle("KA04HB124",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HB1024",Driver.NORMAL));
             Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1024"));
             Assert.assertEquals(3,vehicle.getSlotNumber());
+        }catch(ParkingLotException e){
+        }
+    }
+
+    @Test
+    public void givenTwoVehicle_whenAddingHandiCapped_shouldReturnSlotNumber() {
+        try {
+            ParkingLot lot1=new ParkingLot(2,1,2);
+            ParkingLot lot2=new ParkingLot(3,1,3);
+            ParkingLot lot3=new ParkingLot(4,2,1,1,2);
+            ArrayList parkingLots=new ArrayList();
+            parkingLots.add(lot1);
+            parkingLots.add(lot2);
+            parkingLots.add(lot3);
+            ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
+            parkingLotService.entry(new Vehicle("KA04HB124",Driver.HANDICAPPED));
+            parkingLotService.entry(new Vehicle("KA04HB1024",Driver.NORMAL));
+            Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1024"));
+            Assert.assertEquals(1,vehicle.getSlotNumber());
         }catch(ParkingLotException e){
         }
     }
@@ -39,11 +58,11 @@ public class ParkingLotServiceTest {
             parkingLots.add(lot2);
             parkingLots.add(lot3);
             ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
-            parkingLotService.entry(new Vehicle("KA04HB124"));
-            parkingLotService.entry(new Vehicle("KA04HB1024"));
-            parkingLotService.entry(new Vehicle("KA04HB104"));
-            parkingLotService.entry(new Vehicle("KA04HB1094"));
-            parkingLotService.entry(new Vehicle("KA04HB1004"));
+            parkingLotService.entry(new Vehicle("KA04HB124",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HB1024",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HB104",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HB1094",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HB1004",Driver.NORMAL));
             Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1004"));
             Assert.assertEquals(2,vehicle.getSlotNumber());
             Assert.assertEquals(2,vehicle.getLotNumber());
@@ -62,8 +81,8 @@ public class ParkingLotServiceTest {
             parkingLots.add(lot2);
             parkingLots.add(lot3);
             ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
-            parkingLotService.entry(new Vehicle("KA04HB124"));
-            parkingLotService.entry(new Vehicle("KA04HB1024"));
+            parkingLotService.entry(new Vehicle("KA04HB124",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HB1024",Driver.NORMAL));
             Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1024"));
             Assert.assertEquals(2,vehicle.getLotNumber());
         }catch(ParkingLotException e){
@@ -81,10 +100,10 @@ public class ParkingLotServiceTest {
             parkingLots.add(lot2);
             parkingLots.add(lot3);
             ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
-            parkingLotService.entry(new Vehicle("KA04HB124"));
-            parkingLotService.entry(new Vehicle("KA04HB1024"));
-            parkingLotService.entry(new Vehicle("KA04HP1024"));
-            parkingLotService.entry(new Vehicle("KA04HO1024"));
+            parkingLotService.entry(new Vehicle("KA04HB124",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HB1024",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HP1024",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HO1024",Driver.NORMAL));
             Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HO1024"));
             Assert.assertEquals(1,vehicle.getLotNumber());
         }catch(ParkingLotException e){
@@ -102,8 +121,8 @@ public class ParkingLotServiceTest {
             parkingLots.add(lot2);
             parkingLots.add(lot3);
             ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
-            parkingLotService.entry(new Vehicle(""));
-            parkingLotService.entry(new Vehicle("KA04HB1024"));
+            parkingLotService.entry(new Vehicle("",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HB1024",Driver.NORMAL));
             //Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1024"));
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
@@ -121,11 +140,11 @@ public class ParkingLotServiceTest {
             parkingLots.add(lot2);
             parkingLots.add(lot3);
             ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
-            parkingLotService.entry(new Vehicle("KA04HB124"));
-            parkingLotService.entry(new Vehicle("KA04HB1024"));
-            parkingLotService.entry(new Vehicle("KA04HP1024"));
-            parkingLotService.entry(new Vehicle("KA04HO1024"));
-            parkingLotService.entry(new Vehicle("KA04HO0024"));
+            parkingLotService.entry(new Vehicle("KA04HB124",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HB1024",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HP1024",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HO1024",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HO0024",Driver.NORMAL));
             }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.PARKING_IS_FULL,e.type);
         }
@@ -142,9 +161,9 @@ public class ParkingLotServiceTest {
             parkingLots.add(lot2);
             parkingLots.add(lot3);
             ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
-            parkingLotService.entry(new Vehicle("KA04HB124"));
-            parkingLotService.entry(new Vehicle("KA04HP1024"));
-            parkingLotService.entry(new Vehicle("KA04HP1024"));
+            parkingLotService.entry(new Vehicle("KA04HB124",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HP1024",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HP1024",Driver.NORMAL));
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN,e.type);
         }
@@ -163,9 +182,9 @@ public class ParkingLotServiceTest {
             parkingLots.add(lot2);
             parkingLots.add(lot3);
             ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
-            parkingLotService.entry(new Vehicle("KA04HB124"));
-            parkingLotService.entry(new Vehicle("KA04HP1024"));
-            parkingLotService.exit(new Vehicle("KA04HK1024"));
+            parkingLotService.entry(new Vehicle("KA04HB124",Driver.NORMAL));
+            parkingLotService.entry(new Vehicle("KA04HP1024",Driver.NORMAL));
+            parkingLotService.exit(new Vehicle("KA04HK1024",Driver.NORMAL));
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.VEHICLE_NOT_PRESENT,e.type);
         }
