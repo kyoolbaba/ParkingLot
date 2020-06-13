@@ -14,12 +14,12 @@ public class ParkingLotService {
         parkingLot=new ParkingLot(sizeOfParkingLot);
     }
 
-    public double entry(Vehicle vehicle ) throws ParkingLotException {
-        return parkingLot.parkTheVehicle(vehicle);
+    public void entry(Vehicle vehicle ) throws ParkingLotException {
+         parkingLot.parkTheVehicle(vehicle);
     }
 
-    public int exit(Vehicle vehicle) throws ParkingLotException {
-    return parkingLot.unparkTheVehicle(vehicle);
+    public Vehicle exit(Vehicle vehicle) throws ParkingLotException {
+        return parkingLot.unparkTheVehicle(vehicle);
     }
 
     public int getNumberOfOccupiedLots(){

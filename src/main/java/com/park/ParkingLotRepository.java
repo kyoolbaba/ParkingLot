@@ -37,4 +37,15 @@ public class ParkingLotRepository {
     return listOfLots.get(lotNumber);
     }
 
+    public ParkingLot getLotOfVehicle(Vehicle vehicle){
+        ParkingLot parkingLot=null;
+        for(ParkingLot park:listOfLots){
+            if(park.listOfParkingLots.contains(vehicle)){
+                parkingLot = park;
+                break;
+            }
+        }
+        return parkingLot;
+    }
+
 }

@@ -8,36 +8,85 @@ import java.util.List;
 
 public class ParkingLotServiceTest {
 
+    //TestCases for parking slot with multiple spot
     @Test
-    public void givenOneVehicle_whenParked_shouldReturnCharges() {
+    public void givenTwoVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnSlotNumber() {
         try {
-            List<ParkingLot> listOfParkingLots = new ArrayList();
-            ParkingLot lot1=new ParkingLot(2);
-            lot1.listOfParkingLots.add(new Vehicle("KA04HB1234"));
-            lot1.listOfParkingLots.add(new Vehicle("KA04HB134"));
-            ParkingLot lot2=new ParkingLot(4);
-            lot2.listOfParkingLots.add(new Vehicle("KA04HB134"));
-            lot2.listOfParkingLots.add(new Vehicle("KA04HB13"));
-            lot2.listOfParkingLots.add(new Vehicle("KA04HB163"));
-            ParkingLot lot3=new ParkingLot(4);
-            lot3.listOfParkingLots.add(new Vehicle("KA04HB1134"));
-            lot3.listOfParkingLots.add(new Vehicle("KA04PB134"));
-            lot3.listOfParkingLots.add(new Vehicle("KA04HB1663"));
-            ParkingLotService parkingLotService=new ParkingLotService(listOfParkingLots);
-            double charges = parkingLotService.entry(new Vehicle("KA04HB124",3,false));
-            Assert.assertEquals(30.0,charges,0.5);
-        }catch(ParkingLotException e){}
+            ParkingLot lot1=new ParkingLot(2,1,2);
+            ParkingLot lot2=new ParkingLot(3,1,3);
+            ParkingLot lot3=new ParkingLot(4,2,1,1,2);
+            ArrayList parkingLots=new ArrayList();
+            parkingLots.add(lot1);
+            parkingLots.add(lot2);
+            parkingLots.add(lot3);
+            ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
+            parkingLotService.entry(new Vehicle("KA04HB124"));
+            parkingLotService.entry(new Vehicle("KA04HB1024"));
+            Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1024"));
+            Assert.assertEquals(3,vehicle.getSlotNumber());
+        }catch(ParkingLotException e){
+        }
+    }
+    //TestCases for parking slot with multiple spot
+    @Test
+    public void givenThreeVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnSLotNumber() {
+        try {
+            ParkingLot lot1=new ParkingLot(2,1,2);
+            ParkingLot lot2=new ParkingLot(3,1,3,1);
+            ParkingLot lot3=new ParkingLot(4,2,1,1,2);
+            ArrayList parkingLots=new ArrayList();
+            parkingLots.add(lot1);
+            parkingLots.add(lot2);
+            parkingLots.add(lot3);
+            ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
+            parkingLotService.entry(new Vehicle("KA04HB124"));
+            parkingLotService.entry(new Vehicle("KA04HB1024"));
+            parkingLotService.entry(new Vehicle("KA04HB104"));
+            parkingLotService.entry(new Vehicle("KA04HB1094"));
+            parkingLotService.entry(new Vehicle("KA04HB1004"));
+            Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1004"));
+            Assert.assertEquals(2,vehicle.getSlotNumber());
+            Assert.assertEquals(2,vehicle.getLotNumber());
+        }catch(ParkingLotException e){
+        }
     }
 
     @Test
-    public void givenTwoVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnLastLotNumber() {
+    public void givenTwoVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnLotNumberTest1() {
         try {
-            ParkingLotService parkingLotService = new ParkingLotService(50);
-            parkingLotService.entry(new Vehicle("KA04HB124",6,false));
-            parkingLotService.entry(new Vehicle("KA04HB1024",4,false));
-            parkingLotService.exit(new Vehicle("KA04HB124"));
-            parkingLotService.entry(new Vehicle("KA03HB124",4,false));
-            Assert.assertEquals(50,parkingLotService.exit(new Vehicle("KA03HB124")),0.2);
+            ParkingLot lot1=new ParkingLot(2);
+            ParkingLot lot2=new ParkingLot(3);
+            ParkingLot lot3=new ParkingLot(4);
+            ArrayList parkingLots=new ArrayList();
+            parkingLots.add(lot1);
+            parkingLots.add(lot2);
+            parkingLots.add(lot3);
+            ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
+            parkingLotService.entry(new Vehicle("KA04HB124"));
+            parkingLotService.entry(new Vehicle("KA04HB1024"));
+            Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1024"));
+            Assert.assertEquals(2,vehicle.getLotNumber());
+        }catch(ParkingLotException e){
+        }
+    }
+
+    @Test
+    public void givenTwoVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnLotNumberTest3() {
+        try {
+            ParkingLot lot1=new ParkingLot(2);
+            ParkingLot lot2=new ParkingLot(3);
+            ParkingLot lot3=new ParkingLot(4);
+            ArrayList parkingLots=new ArrayList();
+            parkingLots.add(lot1);
+            parkingLots.add(lot2);
+            parkingLots.add(lot3);
+            ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
+            parkingLotService.entry(new Vehicle("KA04HB124"));
+            parkingLotService.entry(new Vehicle("KA04HB1024"));
+            parkingLotService.entry(new Vehicle("KA04HP1024"));
+            parkingLotService.entry(new Vehicle("KA04HO1024"));
+            Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HO1024"));
+            Assert.assertEquals(1,vehicle.getLotNumber());
         }catch(ParkingLotException e){
         }
     }
@@ -45,141 +94,82 @@ public class ParkingLotServiceTest {
     @Test
     public void givenTwoVehicle_whenParked_shouldReturnTrue() {
         try {
-            ParkingLotService parkingLotService = new ParkingLotService(50);
-            parkingLotService.entry(new Vehicle("",5,false));
-            double charges = parkingLotService.entry(new Vehicle("KA04HB1234"));
+            ParkingLot lot1=new ParkingLot(2,1,2);
+            ParkingLot lot2=new ParkingLot(3,1,3,1);
+            ParkingLot lot3=new ParkingLot(4,2,1,1,2);
+            ArrayList parkingLots=new ArrayList();
+            parkingLots.add(lot1);
+            parkingLots.add(lot2);
+            parkingLots.add(lot3);
+            ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
+            parkingLotService.entry(new Vehicle(""));
+            parkingLotService.entry(new Vehicle("KA04HB1024"));
+            //Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1024"));
         }catch(ParkingLotException e){
-        Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
+            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
         }
     }
 
     @Test
     public void givenPersonVehicleAsNull_whenParked_shouldReturnTrue() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(50);
-            double lotNumber=parkingLotService.entry(null);
-        }catch(ParkingLotException e){
-            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
+        try {
+            ParkingLot lot1 = new ParkingLot(1,1);
+            ParkingLot lot2 = new ParkingLot(2,1,2);
+            ParkingLot lot3 = new ParkingLot(1,1);
+            ArrayList parkingLots = new ArrayList();
+            parkingLots.add(lot1);
+            parkingLots.add(lot2);
+            parkingLots.add(lot3);
+            ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
+            parkingLotService.entry(new Vehicle("KA04HB124"));
+            parkingLotService.entry(new Vehicle("KA04HB1024"));
+            parkingLotService.entry(new Vehicle("KA04HP1024"));
+            parkingLotService.entry(new Vehicle("KA04HO1024"));
+            parkingLotService.entry(new Vehicle("KA04HO0024"));
+            }catch(ParkingLotException e){
+            Assert.assertEquals(ParkingLotException.ExceptionType.PARKING_IS_FULL,e.type);
         }
     }
 
     @Test
     public void givenSameVehicleTwice_whenParked_shouldReturnTrue() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(50);
-            double lotNumber=parkingLotService.entry(new Vehicle("KA04HB1234",5,false));
-            double lotNumber1=parkingLotService.entry(new Vehicle("KA04HB1234",5,false));
+        try {
+            ParkingLot lot1 = new ParkingLot(2,1,3);
+            ParkingLot lot2 = new ParkingLot(1,1);
+            ParkingLot lot3 = new ParkingLot(1,1);
+            ArrayList parkingLots = new ArrayList();
+            parkingLots.add(lot1);
+            parkingLots.add(lot2);
+            parkingLots.add(lot3);
+            ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
+            parkingLotService.entry(new Vehicle("KA04HB124"));
+            parkingLotService.entry(new Vehicle("KA04HP1024"));
+            parkingLotService.entry(new Vehicle("KA04HP1024"));
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN,e.type);
         }
     }
 
-    @Test
-    public void givenVehicle_whenUnParked_shouldReturnItsLotNumber() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(50);
-            double lotNumber=parkingLotService.entry(new Vehicle("KA04HB1234",7,false));
-            double lotNumber1=parkingLotService.entry(new Vehicle("KA03HB1234",9,false));
-            int unpark=parkingLotService.exit(new Vehicle("KA04HB1234"));
-            Assert.assertEquals(50,unpark);
-        }catch(ParkingLotException e){
-        }
-    }
+
 
     @Test
     public void givenVehicleNotPresent_whenUnParked_shouldThrowException() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(50);
-            parkingLotService.entry(new Vehicle("KA04HB1234",5,false));
-            parkingLotService.entry(new Vehicle("KA03HB1234",6,false));
-            int unpark=parkingLotService.exit(new Vehicle("KA03HB1004"));
+        try {
+            ParkingLot lot1 = new ParkingLot(2,2,3);
+            ParkingLot lot2 = new ParkingLot(1,4);
+            ParkingLot lot3 = new ParkingLot(1,2);;
+            ArrayList parkingLots = new ArrayList();
+            parkingLots.add(lot1);
+            parkingLots.add(lot2);
+            parkingLots.add(lot3);
+            ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
+            parkingLotService.entry(new Vehicle("KA04HB124"));
+            parkingLotService.entry(new Vehicle("KA04HP1024"));
+            parkingLotService.exit(new Vehicle("KA04HK1024"));
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.VEHICLE_NOT_PRESENT,e.type);
         }
     }
 
-    @Test
-    public void givenVehicleAsEmpty_whenUnParked_shouldThrowException() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(50);
-            double lotNumber=parkingLotService.entry(new Vehicle("KA04HB1234",1,false));
-            double lotNumber1=parkingLotService.entry(new Vehicle("KA03HB1234",2,false));
-            int unpark=parkingLotService.exit(new Vehicle(""));
-        }catch(ParkingLotException e){
-            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
-        }
-    }
-
-    @Test
-    public void givenVehicleAsNull_whenUnParked_shouldThrowException() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(50);
-            double lotNumber=parkingLotService.entry(new Vehicle("KA04HB1234",6,false));
-            double lotNumber1=parkingLotService.entry(new Vehicle("KA03HB1234",3,false));
-            int unpark=parkingLotService.exit(null);
-        }catch(ParkingLotException e){
-            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
-        }
-    }
-
-    @Test
-    public void givenVehicle_whenParkingLotFull_shouldReturnAvailabilityAsFalse() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(2);
-            double lotNumber=parkingLotService.entry(new Vehicle("KA04HB1234",1,false));
-            double lotNumber1=parkingLotService.entry(new Vehicle("KA03HB1234",1,false));
-            boolean checkAvailability=parkingLotService.checkAvailability();
-            Assert.assertFalse(checkAvailability);
-        }catch(ParkingLotException e){
-
-        }
-    }
-
-    @Test
-    public void givenVehicle_whenParkingLotFull_shouldReturnAvailabilityAsTrue() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(3);
-            double lotNumber=parkingLotService.entry(new Vehicle("KA04HB1234",1,false));
-            double lotNumber1=parkingLotService.entry(new Vehicle("KA03HB1234",1,false));
-            boolean checkAvailability=parkingLotService.checkAvailability();
-            Assert.assertTrue(checkAvailability);
-        }catch(ParkingLotException e){
-
-        }
-    }
-
-    @Test
-    public void givenVehicle_whenParkingLotNotFull_shouldReturnOccupiedLotsPositiveTesting() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(3);
-            double lotNumber=parkingLotService.entry(new Vehicle("KA04HB1234",1,false));
-            double lotNumber1=parkingLotService.entry(new Vehicle("KA03HB1234",2,false));
-            Assert.assertEquals(2, parkingLotService.getNumberOfOccupiedLots());
-        }catch(ParkingLotException e){
-        }
-    }
-
-    @Test
-    public void givenVehicle_whenParkingLotNotFull_shouldReturnOccupiedLotsNegativeTesting() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(3);
-            double lotNumber=parkingLotService.entry(new Vehicle("KA04HB1234",1,false));
-            double lotNumber1=parkingLotService.entry(new Vehicle("KA03HB1234",2,false));
-            Assert.assertNotEquals(3, parkingLotService.getNumberOfOccupiedLots());
-        }catch(ParkingLotException e){
-        }
-    }
-
-    @Test
-    public void givenVehicle_whenParkingLotIsFullParkingAnotherVehicle_shouldThrowParkingFullException() {
-        try{
-            ParkingLotService parkingLotService = new ParkingLotService(2);
-            parkingLotService.entry(new Vehicle("KA04HB1234",1,false));
-            parkingLotService.entry(new Vehicle("KA03HB1234",2,false));
-            parkingLotService.entry(new Vehicle("KA03HV1234",2,false));
-        }catch(ParkingLotException e){
-            Assert.assertEquals(ParkingLotException.ExceptionType.PARKING_IS_FULL,e.type);
-        }
-    }
 
 }

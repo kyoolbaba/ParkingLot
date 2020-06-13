@@ -7,9 +7,8 @@ public class Vehicle {
     private int slotNumber;
     private double charges;
     private int noOfDays;
-    private boolean handicapped;
+    private Driver handicapped;
     private int lotNumber;
-
     public int getLotNumber() {
         return lotNumber;
     }
@@ -18,7 +17,7 @@ public class Vehicle {
         this.lotNumber = lotNumber;
     }
 
-    public boolean isHandicapped() {
+    public Driver isHandicapped() {
         return handicapped;
     }
 
@@ -34,7 +33,7 @@ public class Vehicle {
         return charges;
     }
 
-    public Vehicle(String vehicleNumber, int noOfDays,boolean handicapped) {
+    public Vehicle(String vehicleNumber, Driver handicapped) {
         this.vehicleNumber = vehicleNumber;
         this.noOfDays = noOfDays;
         this.handicapped = handicapped;

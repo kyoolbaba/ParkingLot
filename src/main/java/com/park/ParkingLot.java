@@ -6,6 +6,7 @@ import java.util.List;
 public class ParkingLot {
      int sizeOfParkingLot;
     ParkingLotOwner parkingLotOwner;
+     int[] slotCapacity;
     List<Vehicle> listOfParkingLots ;
     private int[] slots;
     ParkingLotRepository parkingLotRepository;
@@ -15,13 +16,17 @@ public class ParkingLot {
         parkingLotRepository=new ParkingLotRepository(parkingSlots);
     }
 
-    public ParkingLot(int sizeOfParkingLot) {
+    public ParkingLot(int sizeOfParkingLot,int...slotCapacities) throws ParkingLotException {
         this.sizeOfParkingLot = sizeOfParkingLot;
         listOfParkingLots= new ArrayList();
         slots =new int[sizeOfParkingLot];
+        slotCapacity =slotCapacities;
+        if(sizeOfParkingLot!=slotCapacities.length)
+            throw new ParkingLotException("Invalid ParkingLot Input"
+                    ,ParkingLotException.ExceptionType.INVALID_PARKINGLOT_INPUT);
     }
 
-    public double parkTheVehicle(Vehicle vehicle) throws ParkingLotException {
+    public void parkTheVehicle(Vehicle vehicle) throws ParkingLotException {
         if(vehicle==null||vehicle.getVehicleNumber()==""||vehicle.getVehicleNumber()==null)
             throw new ParkingLotException("No Value Entered",
                     ParkingLotException.ExceptionType.INCOMPLETE_DETAILS);
@@ -31,36 +36,38 @@ public class ParkingLot {
         if(this.isFull())
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
         ParkingLot vehicleToBeParkedInThisLot=parkingLotRepository.selectLot();
-        parkingLotOwner.assignLotNumber(vehicleToBeParkedInThisLot.slots,vehicle,parkingLotRepository.getLotNumber());
+        parkingLotOwner.assignLotNumber(vehicleToBeParkedInThisLot.slots,vehicle,vehicleToBeParkedInThisLot.slotCapacity);
+        vehicle.setLotNumber(parkingLotRepository.getLotNumber()+1);
         vehicleToBeParkedInThisLot.listOfParkingLots.add(vehicle);
         if(this.isFull()) {
             this.sendStatusToParkingOwner();
             this.redirectStaff();
         }
-        return vehicle.getCharges();
     }
 
-    public int unparkTheVehicle(Vehicle vehicle) throws ParkingLotException {
+    public Vehicle unparkTheVehicle(Vehicle vehicle) throws ParkingLotException {
         if(vehicle==null|| vehicle.getVehicleNumber()==""||vehicle.getVehicleNumber()==null)
             throw new ParkingLotException("No Value Entered",
                     ParkingLotException.ExceptionType.INCOMPLETE_DETAILS);
-        if(!(listOfParkingLots.contains(vehicle)))
+        if(!(parkingLotRepository.checkVehiclePresent(vehicle)))
             throw new ParkingLotException("Vehicle Not Present"
                     ,ParkingLotException.ExceptionType.VEHICLE_NOT_PRESENT);
-        if(listOfParkingLots.size()==sizeOfParkingLot) {
+        if(this.isFull()) {
             this.sendStatusToParkingOwner();
             this.redirectStaff();
         }
+        ParkingLot vehiclesParkedLot=parkingLotRepository.getLotOfVehicle(vehicle);
         int lotNumber=0;
-        for(Vehicle vehicles:listOfParkingLots){
+        Vehicle vehicleTobeUnparked=null;
+        for(Vehicle vehicles:vehiclesParkedLot.listOfParkingLots){
             if(vehicles.equals(vehicle)){
-                lotNumber=vehicles.getSlotNumber();
-                slots[vehicles.getSlotNumber()-1]=0;
-                listOfParkingLots.remove(vehicles);
+                vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]-= vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]-1;
+                vehicleTobeUnparked=vehicles;
+                vehiclesParkedLot.listOfParkingLots.remove(vehicles);
                 break;
             }
         }
-        return lotNumber;
+        return vehicleTobeUnparked;
     }
 
     public int getOccupiedLots(){
