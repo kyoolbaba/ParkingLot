@@ -25,7 +25,7 @@ public class ParkingLotOwner {
             }
         }
         }else if(vehicle.getDriver().equals(Driver.HANDICAPPED)){
-            for( i=0;i>=lots.length-1;i++){
+            for( i=0;i<=lots.length-1;i++){
                 if(lots[i]!=1*slotCapacity[i]){
                     vehicle.setSlotNumber(i+1);
                     parkingAtttendent.lotNumber(vehicle.getSlotNumber());

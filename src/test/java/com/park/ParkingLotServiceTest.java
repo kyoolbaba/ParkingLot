@@ -13,7 +13,7 @@ public class ParkingLotServiceTest {
     public void givenTwoVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnSlotNumber() {
         try {
             ParkingLot lot1=new ParkingLot(2,1,2);
-            ParkingLot lot2=new ParkingLot(3,1,3);
+            ParkingLot lot2=new ParkingLot(2,1,3);
             ParkingLot lot3=new ParkingLot(4,2,1,1,2);
             ArrayList parkingLots=new ArrayList();
             parkingLots.add(lot1);
@@ -23,16 +23,16 @@ public class ParkingLotServiceTest {
             parkingLotService.entry(new Vehicle("KA04HB124",Driver.NORMAL));
             parkingLotService.entry(new Vehicle("KA04HB1024",Driver.NORMAL));
             Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1024"));
-            Assert.assertEquals(3,vehicle.getSlotNumber());
+            Assert.assertEquals(2,vehicle.getSlotNumber());
         }catch(ParkingLotException e){
         }
     }
-
+    //TestCase for Handicapped player
     @Test
     public void givenTwoVehicle_whenAddingHandiCapped_shouldReturnSlotNumber() {
         try {
             ParkingLot lot1=new ParkingLot(2,1,2);
-            ParkingLot lot2=new ParkingLot(3,1,3);
+            ParkingLot lot2=new ParkingLot(3,1,3,2);
             ParkingLot lot3=new ParkingLot(4,2,1,1,2);
             ArrayList parkingLots=new ArrayList();
             parkingLots.add(lot1);
@@ -41,7 +41,7 @@ public class ParkingLotServiceTest {
             ParkingLotService parkingLotService = new ParkingLotService(parkingLots);
             parkingLotService.entry(new Vehicle("KA04HB124",Driver.HANDICAPPED));
             parkingLotService.entry(new Vehicle("KA04HB1024",Driver.NORMAL));
-            Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB1024"));
+            Vehicle vehicle=parkingLotService.exit(new Vehicle("KA04HB124"));
             Assert.assertEquals(1,vehicle.getSlotNumber());
         }catch(ParkingLotException e){
         }
