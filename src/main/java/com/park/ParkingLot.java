@@ -6,7 +6,7 @@ import java.util.List;
 public class ParkingLot {
      int sizeOfParkingLot;
     ParkingLotOwner parkingLotOwner;
-     int[] slotCapacity;
+     Integer[] slotCapacity;
     List<Vehicle> listOfParkingLots ;
     private int[] slots;
     ParkingLotRepository parkingLotRepository;
@@ -16,7 +16,7 @@ public class ParkingLot {
         parkingLotRepository=new ParkingLotRepository(parkingSlots);
     }
 
-    public ParkingLot(int sizeOfParkingLot,int...slotCapacities) throws ParkingLotException {
+    public ParkingLot(int sizeOfParkingLot,Integer...slotCapacities) throws ParkingLotException {
         this.sizeOfParkingLot = sizeOfParkingLot;
         listOfParkingLots= new ArrayList();
         slots =new int[sizeOfParkingLot];
@@ -35,7 +35,7 @@ public class ParkingLot {
                     ,ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN);
         if(this.isFull())
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
-        ParkingLot vehicleToBeParkedInThisLot=parkingLotRepository.selectLot();
+        ParkingLot vehicleToBeParkedInThisLot=parkingLotRepository.selectLot(vehicle);
         parkingLotOwner.assignLotNumber(vehicleToBeParkedInThisLot.slots,vehicle,vehicleToBeParkedInThisLot.slotCapacity);
         vehicle.setLotNumber(parkingLotRepository.getLotNumber()+1);
         vehicleToBeParkedInThisLot.listOfParkingLots.add(vehicle);
@@ -61,7 +61,8 @@ public class ParkingLot {
         Vehicle vehicleTobeUnparked=null;
         for(Vehicle vehicles:vehiclesParkedLot.listOfParkingLots){
             if(vehicles.equals(vehicle)){
-                vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]-= vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]-1;
+                vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]= vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]
+                        -(1*vehicles.getVehicleSize());
                 vehicleTobeUnparked=vehicles;
                 vehiclesParkedLot.listOfParkingLots.remove(vehicles);
                 break;

@@ -6,7 +6,22 @@ public class Vehicle {
     private String vehicleNumber;
     private int slotNumber;
     private double charges;
-    private int noOfDays;
+    private int vehicleSize;
+    private String color;
+
+    public String getColor() {
+        return color;
+    }
+
+    public Vehicle setColor(String color) {
+        this.color = color;
+        return this;
+    }
+
+    public int getVehicleSize() {
+        return vehicleSize;
+    }
+
     private Driver handicapped;
     private int lotNumber;
     public int getLotNumber() {
@@ -25,17 +40,14 @@ public class Vehicle {
         this.charges = charges;
     }
 
-    public int getNoOfDays() {
-        return noOfDays;
-    }
-
     public double getCharges() {
         return charges;
     }
 
-    public Vehicle(String vehicleNumber, Driver handicapped) {
+    public Vehicle(String vehicleNumber, Driver handicapped,int vehicleSize) {
         this.vehicleNumber = vehicleNumber;
         this.handicapped = handicapped;
+        this.vehicleSize = vehicleSize;
     }
 
     public Vehicle(String vehicleNumber) {

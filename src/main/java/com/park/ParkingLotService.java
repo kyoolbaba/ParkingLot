@@ -6,10 +6,6 @@ public class ParkingLotService {
 
     ParkingLot parkingLot;
 
-    public ParkingLotService(int s) {
-
-    }
-
     public ParkingLotService(List<ParkingLot> sizeOfParkingLot) {
         parkingLot=new ParkingLot(sizeOfParkingLot);
     }
