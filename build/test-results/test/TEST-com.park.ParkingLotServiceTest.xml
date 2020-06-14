@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.park.ParkingLotServiceTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2020-06-14T13:22:44" hostname="KYOOLBABA" time="0.036">
+<testsuite name="com.park.ParkingLotServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-14T17:50:40" hostname="KYOOLBABA" time="0.026">
   <properties/>
-  <testcase name="givenVehicleOfSize3_whenUnParked_shouldOccupySpotHavingThreeSlots" classname="com.park.ParkingLotServiceTest" time="0.016"/>
-  <testcase name="givenThreeVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnSLotNumber" classname="com.park.ParkingLotServiceTest" time="0.001"/>
-  <testcase name="givenPersonVehicleAsNull_whenParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.002"/>
-  <testcase name="givenVehicleOfSizeMoreThanSlotCapacity_whenUnParked_shouldThrowException" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenSameVehicleTwice_whenParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenVehicleOfSize3_whenUnParked_shouldOccupySpotHavingSlotswithSuitableLot" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenVehicleNotPresent_whenUnParked_shouldThrowException" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenTwoVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnLotNumberTest1" classname="com.park.ParkingLotServiceTest" time="0.001"/>
-  <testcase name="givenTwoVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnLotNumberTest3" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenTwoVehicle_whenParked_shouldReturnTrue" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenTwoVehicle_whenAddingHandiCapped_shouldReturnSlotNumber" classname="com.park.ParkingLotServiceTest" time="0.001"/>
-  <testcase name="givenVehicleOfSize2_whenUnParked_shouldOccupySpotHavingTwoSlots" classname="com.park.ParkingLotServiceTest" time="0.001"/>
-  <testcase name="givenVehicleOfSize5_whenUnParked_shouldOccupySpotHavingSlotswithSuitableLot" classname="com.park.ParkingLotServiceTest" time="0.0"/>
-  <testcase name="givenTwoVehicle_whenRemovedFirstVehicleAndAddingAnotherVehicle_shouldReturnSlotNumber" classname="com.park.ParkingLotServiceTest" time="0.001"/>
+  <testcase name="givenVehicleWithColor_whenQuried_shouldReturnListOfCarsMachtingColor" classname="com.park.ParkingLotServiceTest" time="0.026"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

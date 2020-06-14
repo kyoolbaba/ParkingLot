@@ -231,4 +231,52 @@ public class ParkingRepositoryTest {
         }catch(ParkingLotException e){}
     }
 
+    @Test
+    public void givenListOfParkingLots_whenSearched_ShouldReturnCountOfWhiteColor() {
+        try{
+            List<ParkingLot> listOfParkingLots = new ArrayList();
+            ParkingLot lot1=new ParkingLot(2,1,2);
+            lot1.listOfParkingLots.add(new Vehicle("KA04HB1234",Driver.NORMAL,2).setColor("WHITE"));
+            lot1.listOfParkingLots.add(new Vehicle("KA04HB134",Driver.NORMAL,2).setColor("RED"));
+            ParkingLot lot2=new ParkingLot(4,1,2,3,1);
+            lot2.listOfParkingLots.add(new Vehicle("KA04HB134",Driver.NORMAL,2).setColor("WHITE"));
+            lot2.listOfParkingLots.add(new Vehicle("KA04HB13",Driver.NORMAL,2).setColor("white"));
+            lot2.listOfParkingLots.add(new Vehicle("KA04HB163",Driver.NORMAL,2));
+            ParkingLot lot3=new ParkingLot(4,1,2,3,1);
+            lot3.listOfParkingLots.add(new Vehicle("KA04HB1134",Driver.NORMAL,2));
+            lot3.listOfParkingLots.add(new Vehicle("KA04PB134",Driver.NORMAL,2).setColor("BLACK"));
+            listOfParkingLots.add(lot1);
+            listOfParkingLots.add(lot2);;
+            listOfParkingLots.add(lot3);
+            ParkingLotRepository parkingLotRepository= new ParkingLotRepository(listOfParkingLots);
+            List<Vehicle> listOfVehicles=parkingLotRepository.
+                    getDetailsByColor("white");
+            Assert.assertEquals(3,listOfVehicles.size());
+        }catch(ParkingLotException e){}
+    }
+
+    @Test
+    public void givenListOfParkingLots_whenSearched_ShouldReturnVehiclesWithWhiteColor() {
+        try{
+            List<ParkingLot> listOfParkingLots = new ArrayList();
+            ParkingLot lot1=new ParkingLot(2,1,2);
+            lot1.listOfParkingLots.add(new Vehicle("KA04HB1234",Driver.NORMAL,2).setColor("WHITE"));
+            lot1.listOfParkingLots.add(new Vehicle("KA04HB134",Driver.NORMAL,1).setColor("RED"));
+            ParkingLot lot2=new ParkingLot(4,1,2,3,1);
+            lot2.listOfParkingLots.add(new Vehicle("KA04HB134",Driver.NORMAL,3).setColor("WHITE"));
+            lot2.listOfParkingLots.add(new Vehicle("KA04HB13",Driver.NORMAL,2));
+            lot2.listOfParkingLots.add(new Vehicle("KA04HB163",Driver.NORMAL,1));
+            ParkingLot lot3=new ParkingLot(4,1,2,3,1);
+            lot3.listOfParkingLots.add(new Vehicle("KA04HB1134",Driver.NORMAL,2));
+            lot3.listOfParkingLots.add(new Vehicle("KA04PB134",Driver.NORMAL,2).setColor("BLACK"));
+            listOfParkingLots.add(lot1);
+            listOfParkingLots.add(lot2);;
+            listOfParkingLots.add(lot3);
+            ParkingLotRepository parkingLotRepository= new ParkingLotRepository(listOfParkingLots);
+            List<Vehicle> listOfVehicles=parkingLotRepository.
+                    getDetailsByColor("WHITE");
+            Assert.assertEquals(2,listOfVehicles.size());
+        }catch(ParkingLotException e){}
+    }
+
 }

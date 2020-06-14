@@ -5,16 +5,20 @@ import java.util.Objects;
 public class Vehicle {
     private String vehicleNumber;
     private int slotNumber;
-    private double charges;
     private int vehicleSize;
-    private String color;
+    private String color="";
+    private String vehicleLovation="";
+
+    public String getVehicleLocation(){
+        return Integer.toString(this.lotNumber)+"_"+Integer.toString(this.slotNumber);
+    }
 
     public String getColor() {
         return color;
     }
 
     public Vehicle setColor(String color) {
-        this.color = color;
+        this.color = color.toUpperCase();
         return this;
     }
 
@@ -34,14 +38,6 @@ public class Vehicle {
 
     public Driver getDriver() {
         return handicapped;
-    }
-
-    public void setCharges(double charges) {
-        this.charges = charges;
-    }
-
-    public double getCharges() {
-        return charges;
     }
 
     public Vehicle(String vehicleNumber, Driver handicapped,int vehicleSize) {

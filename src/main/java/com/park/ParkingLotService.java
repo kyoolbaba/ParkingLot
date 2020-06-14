@@ -10,11 +10,12 @@ public class ParkingLotService {
         parkingLot=new ParkingLot(sizeOfParkingLot);
     }
 
-    public void entry(Vehicle vehicle ) throws ParkingLotException {
+    public void parkTheVehicle(Vehicle vehicle ) throws ParkingLotException {
          parkingLot.parkTheVehicle(vehicle);
+
     }
 
-    public Vehicle exit(Vehicle vehicle) throws ParkingLotException {
+    public Vehicle unParkTheVehicle(Vehicle vehicle) throws ParkingLotException {
         return parkingLot.unparkTheVehicle(vehicle);
     }
 
@@ -24,6 +25,10 @@ public class ParkingLotService {
 
     public boolean checkAvailability(){
         return (!(parkingLot.isFull()));
+    }
+
+    public List getDetailsByColor(String matches){
+       return parkingLot.getDetailsByColor(matches);
     }
 
 }

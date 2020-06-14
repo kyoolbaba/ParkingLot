@@ -1,9 +1,8 @@
 package com.park;
 
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ParkingLotRepository {
 
@@ -29,7 +28,7 @@ public class ParkingLotRepository {
 
     public ParkingLot selectLot(Vehicle vehicle) throws ParkingLotException {
          lotNumber=0;
-         int sizeCheck=1;
+         int sizeCheck=0;
         int size=(int)Double.POSITIVE_INFINITY;
         for(int i=listOfLots.size()-1;i>=0;i--){
             ParkingLot park=listOfLots.get(i);
@@ -39,6 +38,7 @@ public class ParkingLotRepository {
                     &&(vehicle.getVehicleSize()<=maxSizeSlot)){
                 size=park.listOfParkingLots.size();
                 lotNumber=i;
+                sizeCheck--;
             }
             sizeCheck++;
         }
@@ -57,6 +57,16 @@ public class ParkingLotRepository {
             }
         }
         return parkingLot;
+    }
+
+    public List getDetailsByColor(String matches){
+        List<Vehicle> listOfVehicles=new ArrayList<>();
+        for(ParkingLot park:listOfLots){
+            listOfVehicles.addAll( park.listOfParkingLots.stream().
+                    filter(color->color.getColor().equals(matches.toUpperCase()))
+                   .collect(Collectors.toList()));
+        }
+        return listOfVehicles;
     }
 
 }

@@ -87,4 +87,7 @@ public class ParkingLot {
         return new AirportSecurity(!isFull());
     }
 
+    public List getDetailsByColor(String matches) {
+        return parkingLotRepository.getDetailsByColor(matches);
+    }
 }
