@@ -3,10 +3,10 @@ package com.park;
 public class ParkingLotOwner {
     private boolean displayFullSign;
     private int PARKING_CHARGES_PER_DAY=10;
-    ParkingLotService parkingLotService;
+    ParkingLotSystem parkingLotSystem;
 
-    public ParkingLotOwner(ParkingLotService parkingLotService) {
-        this.parkingLotService = parkingLotService;
+    public ParkingLotOwner(ParkingLotSystem parkingLotSystem) {
+        this.parkingLotSystem = parkingLotSystem;
     }
 
     public ParkingLotOwner() {
@@ -39,7 +39,7 @@ public class ParkingLotOwner {
 
 
     public ParkingLot getDetails(){
-        return parkingLotService.parkingLot.getTotalVehiclesParked();
+        return parkingLotSystem.parkingLot.getTotalVehiclesParked();
     }
 
 

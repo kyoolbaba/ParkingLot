@@ -200,8 +200,8 @@ public class ParkingRepositoryTest {
             listOfParkingLots.add(lot2);;
             listOfParkingLots.add(lot3);
             ParkingLotRepository parkingLotRepository= new ParkingLotRepository(listOfParkingLots);
-            ParkingLot parkingLot=parkingLotRepository.getLotOfVehicle(new Vehicle("KA04HB1134",Driver.NORMAL,3));
-            Assert.assertEquals(lot3,  parkingLot);
+            ParkingLot parkingLot =parkingLotRepository.getLotOfVehicle(new Vehicle("KA04HB1134",Driver.NORMAL,3));
+            Assert.assertEquals(lot3, parkingLot);
         }catch(ParkingLotException e){}
     }
 
@@ -223,9 +223,9 @@ public class ParkingRepositoryTest {
             listOfParkingLots.add(lot2);;
             listOfParkingLots.add(lot3);
             ParkingLotRepository parkingLotRepository= new ParkingLotRepository(listOfParkingLots);
-            ParkingLot parkingLot=parkingLotRepository.
+            ParkingLot parkingLot =parkingLotRepository.
                     getLotOfVehicle(new Vehicle("KA04HB1134",Driver.NORMAL,3));
-            Assert.assertNotEquals(lot1,  parkingLot);
+            Assert.assertNotEquals(lot1, parkingLot);
         }catch(ParkingLotException e){}
     }
 

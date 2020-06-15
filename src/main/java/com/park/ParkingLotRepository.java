@@ -49,7 +49,7 @@ public class ParkingLotRepository {
     }
 
     public ParkingLot getLotOfVehicle(Vehicle vehicle){
-        ParkingLot parkingLot=null;
+        ParkingLot parkingLot =null;
         for(ParkingLot park:listOfLots){
             if(park.listOfParkingLots.contains(vehicle)){
                 parkingLot = park;
@@ -58,8 +58,6 @@ public class ParkingLotRepository {
         }
         return parkingLot;
     }
-
-
 
     public List getVehicleDetails(){
         List<Vehicle> listOfVehicles=new ArrayList<>();

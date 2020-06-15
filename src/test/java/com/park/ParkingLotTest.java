@@ -1,9 +1,9 @@
 package com.park;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.*;
 
 public class ParkingLotTest {
 
@@ -14,11 +14,10 @@ public class ParkingLotTest {
     ParkingLot parkingLot;
 
     @Test
-    public void name() {
+    public void givenParkingLot_whenAddedVehicle_ShouldReturnParkingSlotNumber() {
         try{
             ParkingLot parkingLot = new ParkingLot(2,1,3);
-        //    when(parkingLotOwner.
-          //  parkingLot.parkTheVehicle();
+            Assert.assertEquals(1,parkingLot.parkVehicle(new Vehicle("KAO4HB1234")));
         }catch(ParkingLotException e){}
     }
 }

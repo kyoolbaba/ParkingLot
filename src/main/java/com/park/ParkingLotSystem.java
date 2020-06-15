@@ -1,22 +1,21 @@
 package com.park;
 
-import java.util.List;
-
-public class ParkingLotService {
+public class ParkingLotSystem {
 
     ParkingLot parkingLot;
 
-    public ParkingLotService(List<ParkingLot> sizeOfParkingLot) {
-        parkingLot=new ParkingLot(sizeOfParkingLot);
+    public ParkingLotSystem(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
     }
 
     public void parkTheVehicle(Vehicle vehicle ) throws ParkingLotException {
-         parkingLot.parkTheVehicle(vehicle);
+         parkingLot.parkVehicle(vehicle);
 
     }
 
     public Vehicle unParkTheVehicle(Vehicle vehicle) throws ParkingLotException {
-        return parkingLot.unparkTheVehicle(vehicle);
+      //  return parkingLot.unparkVehicle(vehicle);
+        return vehicle;
     }
 
     public int getNumberOfOccupiedLots(){
