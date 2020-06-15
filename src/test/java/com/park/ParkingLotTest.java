@@ -17,8 +17,8 @@ public class ParkingLotTest {
     public void name() {
         try{
             ParkingLot parkingLot = new ParkingLot(2,1,3);
-            when(parkingLotOwner.
-            parkingLot.parkTheVehicle();
+        //    when(parkingLotOwner.
+          //  parkingLot.parkTheVehicle();
         }catch(ParkingLotException e){}
     }
 }

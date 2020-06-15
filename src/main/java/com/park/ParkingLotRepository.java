@@ -59,11 +59,13 @@ public class ParkingLotRepository {
         return parkingLot;
     }
 
-    public List getDetailsByColor(String matches){
+
+
+    public List getVehicleDetails(){
         List<Vehicle> listOfVehicles=new ArrayList<>();
         for(ParkingLot park:listOfLots){
             listOfVehicles.addAll( park.listOfParkingLots.stream().
-                    filter(color->color.getColor().equals(matches.toUpperCase()))
+                    filter(vehicle->vehicle.getVehicleNumber()!=(null))
                    .collect(Collectors.toList()));
         }
         return listOfVehicles;

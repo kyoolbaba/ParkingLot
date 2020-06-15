@@ -27,8 +27,4 @@ public class ParkingLotService {
         return (!(parkingLot.isFull()));
     }
 
-    public List getDetailsByColor(String matches){
-       return parkingLot.getDetailsByColor(matches);
-    }
-
 }

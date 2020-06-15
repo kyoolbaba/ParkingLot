@@ -2,11 +2,9 @@ package com.park;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.mockito.Mockito.*;
 
 public class ParkingRepositoryTest {
 
@@ -250,7 +248,7 @@ public class ParkingRepositoryTest {
             listOfParkingLots.add(lot3);
             ParkingLotRepository parkingLotRepository= new ParkingLotRepository(listOfParkingLots);
             List<Vehicle> listOfVehicles=parkingLotRepository.
-                    getDetailsByColor("white");
+                    getVehicleDetails();
             Assert.assertEquals(3,listOfVehicles.size());
         }catch(ParkingLotException e){}
     }
@@ -274,7 +272,7 @@ public class ParkingRepositoryTest {
             listOfParkingLots.add(lot3);
             ParkingLotRepository parkingLotRepository= new ParkingLotRepository(listOfParkingLots);
             List<Vehicle> listOfVehicles=parkingLotRepository.
-                    getDetailsByColor("WHITE");
+                    getVehicleDetails();
             Assert.assertEquals(2,listOfVehicles.size());
         }catch(ParkingLotException e){}
     }

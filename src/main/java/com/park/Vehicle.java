@@ -7,7 +7,39 @@ public class Vehicle {
     private int slotNumber;
     private int vehicleSize;
     private String color="";
-    private String vehicleLovation="";
+    private int duration;
+    private String vehicleLocation ="";
+    private Driver handicapped;
+    private int lotNumber;
+    private String vehicleName;
+    private String attendentName;
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public Vehicle setDuration(int duration) {
+        this.duration = duration;
+        return this;
+    }
+
+    public String getAttendentName() {
+        return attendentName;
+    }
+
+    public Vehicle setAttendentName(String attendentName) {
+        this.attendentName = attendentName.toUpperCase();
+        return this;
+    }
+
+    public String getVehicleName() {
+        return vehicleName;
+    }
+
+    public Vehicle setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName.toUpperCase();
+        return this;
+    }
 
     public String getVehicleLocation(){
         return Integer.toString(this.lotNumber)+"_"+Integer.toString(this.slotNumber);
@@ -26,8 +58,6 @@ public class Vehicle {
         return vehicleSize;
     }
 
-    private Driver handicapped;
-    private int lotNumber;
     public int getLotNumber() {
         return lotNumber;
     }

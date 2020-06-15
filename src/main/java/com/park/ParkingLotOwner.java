@@ -3,12 +3,17 @@ package com.park;
 public class ParkingLotOwner {
     private boolean displayFullSign;
     private int PARKING_CHARGES_PER_DAY=10;
+    ParkingLotService parkingLotService;
 
-    public ParkingLotOwner(boolean displayFullSign) {
-        this.displayFullSign = displayFullSign;
+    public ParkingLotOwner(ParkingLotService parkingLotService) {
+        this.parkingLotService = parkingLotService;
     }
 
     public ParkingLotOwner() {
+    }
+
+    public ParkingLotOwner(boolean displayFullSign) {
+        this.displayFullSign = displayFullSign;
     }
 
     public void assignLotNumber(int[] lots, Vehicle vehicle, Integer[] slotCapacity){
@@ -30,9 +35,12 @@ public class ParkingLotOwner {
                 }
             }
         }
-
     }
 
+
+    public ParkingLot getDetails(){
+        return parkingLotService.parkingLot.getTotalVehiclesParked();
+    }
 
 
 }

@@ -1,13 +1,17 @@
 package com.park;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ParkingLot {
      int sizeOfParkingLot;
     ParkingLotOwner parkingLotOwner;
      Integer[] slotCapacity;
     List<Vehicle> listOfParkingLots ;
+    List<Vehicle> totalVehiclesPresent;
     private int[] slots;
     ParkingLotRepository parkingLotRepository;
 
@@ -17,10 +21,10 @@ public class ParkingLot {
     }
 
     public ParkingLot(int sizeOfParkingLot,Integer...slotCapacities) throws ParkingLotException {
-        this.sizeOfParkingLot = sizeOfParkingLot;
         listOfParkingLots= new ArrayList();
         slots =new int[sizeOfParkingLot];
         slotCapacity =slotCapacities;
+        this.sizeOfParkingLot = Arrays.stream(slotCapacities).mapToInt(i->i).sum();
         if(sizeOfParkingLot!=slotCapacities.length)
             throw new ParkingLotException("Invalid ParkingLot Input"
                     ,ParkingLotException.ExceptionType.INVALID_PARKINGLOT_INPUT);
@@ -87,7 +91,45 @@ public class ParkingLot {
         return new AirportSecurity(!isFull());
     }
 
-    public List getDetailsByColor(String matches) {
-        return parkingLotRepository.getDetailsByColor(matches);
+    public ParkingLot getTotalVehiclesParked() {
+        totalVehiclesPresent= parkingLotRepository.getVehicleDetails();
+        return this;
     }
+
+    public ParkingLot selectByColor(String matches){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(color->color.getColor()
+                .equals(matches.toUpperCase())).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingLot selectByName(String vehicleName){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(name->name.getVehicleName()
+                .equals(vehicleName.toUpperCase())).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingLot selectByDuration(int withIn){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(time->time
+                .getDuration()<=withIn).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingLot selectBySlotNumber(int slotNumber){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(slotNum->slotNum
+                .getSlotNumber()==slotNumber).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingLot selectByDriverType(Driver driverType){
+        totalVehiclesPresent=totalVehiclesPresent.stream().
+                filter(type->type.getDriver().equals(driverType)).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingLot selectBySize(int size){
+        totalVehiclesPresent=totalVehiclesPresent.stream().
+                filter(siz->siz.getVehicleSize()==size).collect(Collectors.toList());
+        return this;
+    }
+
 }
