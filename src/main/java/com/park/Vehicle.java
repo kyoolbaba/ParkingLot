@@ -6,13 +6,17 @@ public class Vehicle {
     private String vehicleNumber;
     private int slotNumber;
     private int vehicleSize;
-    private String color="";
+    private VehicleColor vehicleColor;
     private int duration;
     private String vehicleLocation ="";
     private Driver handicapped;
     private int lotNumber;
     private String vehicleName;
     private String attendentName;
+
+    enum VehicleColor{
+        GREEN,RED,WHITE,BLUE,BLACK;
+    }
 
     public int getDuration() {
         return duration;
@@ -21,6 +25,10 @@ public class Vehicle {
     public Vehicle setDuration(int duration) {
         this.duration = duration;
         return this;
+    }
+
+    public VehicleColor getVehicleColor() {
+        return vehicleColor;
     }
 
     public String getAttendentName() {
@@ -45,15 +53,6 @@ public class Vehicle {
         return Integer.toString(this.lotNumber)+"_"+Integer.toString(this.slotNumber);
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public Vehicle setColor(String color) {
-        this.color = color.toUpperCase();
-        return this;
-    }
-
     public int getVehicleSize() {
         return vehicleSize;
     }
@@ -70,6 +69,12 @@ public class Vehicle {
         return handicapped;
     }
 
+    public Vehicle(String vehicleNumber, Driver handicapped,int vehicleSize,VehicleColor vehicleColor) {
+        this.vehicleNumber = vehicleNumber;
+        this.handicapped = handicapped;
+        this.vehicleSize = vehicleSize;
+        this.vehicleColor = vehicleColor;
+    }
     public Vehicle(String vehicleNumber, Driver handicapped,int vehicleSize) {
         this.vehicleNumber = vehicleNumber;
         this.handicapped = handicapped;

@@ -1,135 +1,74 @@
 package com.park;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class ParkingLot {
-     int sizeOfParkingLot;
-    ParkingLotOwner parkingLotOwner;
-     Integer[] slotCapacity;
-    List<Vehicle> listOfParkingLots ;
-    List<Vehicle> totalVehiclesPresent;
-    private int[] slots;
-    ParkingLotRepository parkingLotRepository;
 
-    public ParkingLot(List<ParkingLot> parkingSlots) {
-        parkingLotOwner=new ParkingLotOwner();
-        parkingLotRepository=new ParkingLotRepository(parkingSlots);
+    private List<ParkingSlot> listOfLots;
+    private int lotNumber;
+
+    public int getLotNumber() {
+        return lotNumber;
     }
 
-    public ParkingLot(int sizeOfParkingLot,Integer...slotCapacities) throws ParkingLotException {
-        listOfParkingLots= new ArrayList();
-        slots =new int[sizeOfParkingLot];
-        slotCapacity =slotCapacities;
-        this.sizeOfParkingLot = Arrays.stream(slotCapacities).mapToInt(i->i).sum();
-        if(sizeOfParkingLot!=slotCapacities.length)
-            throw new ParkingLotException("Invalid ParkingLot Input"
-                    ,ParkingLotException.ExceptionType.INVALID_PARKINGLOT_INPUT);
+    public ParkingLot(List<ParkingSlot> listOfLots) {
+        this.listOfLots = listOfLots;
     }
 
-    public void parkTheVehicle(Vehicle vehicle) throws ParkingLotException {
-        if(vehicle==null||vehicle.getVehicleNumber()==""||vehicle.getVehicleNumber()==null)
-            throw new ParkingLotException("No Value Entered",
-                    ParkingLotException.ExceptionType.INCOMPLETE_DETAILS);
-        if(parkingLotRepository.checkVehiclePresent(vehicle))
-            throw new ParkingLotException("Vehicle Already Pressent"
-                    ,ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN);
-        if(this.isFull())
-            throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
-        ParkingLot vehicleToBeParkedInThisLot=parkingLotRepository.selectLot(vehicle);
-        parkingLotOwner.assignLotNumber(vehicleToBeParkedInThisLot.slots,vehicle,vehicleToBeParkedInThisLot.slotCapacity);
-        vehicle.setLotNumber(parkingLotRepository.getLotNumber()+1);
-        vehicleToBeParkedInThisLot.listOfParkingLots.add(vehicle);
-        if(this.isFull()) {
-            this.sendStatusToParkingOwner();
-            this.redirectStaff();
+    public boolean checkVehiclePresent(Vehicle vehicle){
+       return listOfLots.stream().anyMatch(vehiclesMatch->vehiclesMatch.listOfParkingLots.contains(vehicle));
+    }
+
+    public boolean checkParkingFullOrNot(){
+        return listOfLots.stream().allMatch(listOfVehiclesInLot->listOfVehiclesInLot.
+                listOfParkingLots.size()==listOfVehiclesInLot.sizeOfParkingLot);
+    }
+
+    public ParkingSlot selectLot(Vehicle vehicle) throws ParkingLotException {
+         lotNumber=0;
+         int sizeCheck=0;
+        int size=(int)Double.POSITIVE_INFINITY;
+        for(int i=listOfLots.size()-1;i>=0;i--){
+            ParkingSlot park=listOfLots.get(i);
+            List<Integer> list= Arrays.asList(park.slotCapacity);
+            Integer maxSizeSlot = list.stream().mapToInt(maximum->maximum).max().orElse(Integer.MAX_VALUE);
+            if(park.listOfParkingLots.size()<=size&&(!(park.listOfParkingLots.size()>=park.sizeOfParkingLot))
+                    &&(vehicle.getVehicleSize()<=maxSizeSlot)){
+                size=park.listOfParkingLots.size();
+                lotNumber=i;
+                sizeCheck--;
+            }
+            sizeCheck++;
         }
+        if(sizeCheck==listOfLots.size())
+            throw new ParkingLotException("Parking slot vehicle is not suitable with any Lot"
+                    ,ParkingLotException.ExceptionType.PARKING_SIZE_NOT_AVAILABLE);
+    return listOfLots.get(lotNumber);
     }
 
-    public Vehicle unparkTheVehicle(Vehicle vehicle) throws ParkingLotException {
-        if(vehicle==null|| vehicle.getVehicleNumber()==""||vehicle.getVehicleNumber()==null)
-            throw new ParkingLotException("No Value Entered",
-                    ParkingLotException.ExceptionType.INCOMPLETE_DETAILS);
-        if(!(parkingLotRepository.checkVehiclePresent(vehicle)))
-            throw new ParkingLotException("Vehicle Not Present"
-                    ,ParkingLotException.ExceptionType.VEHICLE_NOT_PRESENT);
-        if(this.isFull()) {
-            this.sendStatusToParkingOwner();
-            this.redirectStaff();
-        }
-        ParkingLot vehiclesParkedLot=parkingLotRepository.getLotOfVehicle(vehicle);
-        int lotNumber=0;
-        Vehicle vehicleTobeUnparked=null;
-        for(Vehicle vehicles:vehiclesParkedLot.listOfParkingLots){
-            if(vehicles.equals(vehicle)){
-                vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]= vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]
-                        -(1*vehicles.getVehicleSize());
-                vehicleTobeUnparked=vehicles;
-                vehiclesParkedLot.listOfParkingLots.remove(vehicles);
+    public ParkingSlot getLotOfVehicle(Vehicle vehicle){
+        ParkingSlot parkingSlot =null;
+        for(ParkingSlot park:listOfLots){
+            if(park.listOfParkingLots.contains(vehicle)){
+                parkingSlot = park;
                 break;
             }
         }
-        return vehicleTobeUnparked;
+        return parkingSlot;
     }
 
-    public int getOccupiedLots(){
-        return listOfParkingLots.size();
-    }
 
-    public boolean isFull(){
-        return parkingLotRepository.checkParkingFullOrNot();
-    }
 
-    public ParkingLotOwner sendStatusToParkingOwner(){
-          return new ParkingLotOwner(this.isFull());
-    }
-
-    public AirportSecurity redirectStaff(){
-        return new AirportSecurity(!isFull());
-    }
-
-    public ParkingLot getTotalVehiclesParked() {
-        totalVehiclesPresent= parkingLotRepository.getVehicleDetails();
-        return this;
-    }
-
-    public ParkingLot selectByColor(String matches){
-        totalVehiclesPresent=totalVehiclesPresent.stream().filter(color->color.getColor()
-                .equals(matches.toUpperCase())).collect(Collectors.toList());
-        return this;
-    }
-
-    public ParkingLot selectByName(String vehicleName){
-        totalVehiclesPresent=totalVehiclesPresent.stream().filter(name->name.getVehicleName()
-                .equals(vehicleName.toUpperCase())).collect(Collectors.toList());
-        return this;
-    }
-
-    public ParkingLot selectByDuration(int withIn){
-        totalVehiclesPresent=totalVehiclesPresent.stream().filter(time->time
-                .getDuration()<=withIn).collect(Collectors.toList());
-        return this;
-    }
-
-    public ParkingLot selectBySlotNumber(int slotNumber){
-        totalVehiclesPresent=totalVehiclesPresent.stream().filter(slotNum->slotNum
-                .getSlotNumber()==slotNumber).collect(Collectors.toList());
-        return this;
-    }
-
-    public ParkingLot selectByDriverType(Driver driverType){
-        totalVehiclesPresent=totalVehiclesPresent.stream().
-                filter(type->type.getDriver().equals(driverType)).collect(Collectors.toList());
-        return this;
-    }
-
-    public ParkingLot selectBySize(int size){
-        totalVehiclesPresent=totalVehiclesPresent.stream().
-                filter(siz->siz.getVehicleSize()==size).collect(Collectors.toList());
-        return this;
+    public List getVehicleDetails(){
+        List<Vehicle> listOfVehicles=new ArrayList<>();
+        for(ParkingSlot park:listOfLots){
+            listOfVehicles.addAll( park.listOfParkingLots.stream().
+                    filter(vehicle->vehicle.getVehicleNumber()!=(null))
+                   .collect(Collectors.toList()));
+        }
+        return listOfVehicles;
     }
 
 }

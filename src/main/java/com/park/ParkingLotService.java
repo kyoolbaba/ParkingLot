@@ -4,27 +4,27 @@ import java.util.List;
 
 public class ParkingLotService {
 
-    ParkingLot parkingLot;
+    ParkingSlot parkingSlot;
 
-    public ParkingLotService(List<ParkingLot> sizeOfParkingLot) {
-        parkingLot=new ParkingLot(sizeOfParkingLot);
+    public ParkingLotService(List<ParkingSlot> sizeOfParkingSlot) {
+        parkingSlot =new ParkingSlot(sizeOfParkingSlot);
     }
 
     public void parkTheVehicle(Vehicle vehicle ) throws ParkingLotException {
-         parkingLot.parkTheVehicle(vehicle);
+         parkingSlot.parkTheVehicle(vehicle);
 
     }
 
     public Vehicle unParkTheVehicle(Vehicle vehicle) throws ParkingLotException {
-        return parkingLot.unparkTheVehicle(vehicle);
+        return parkingSlot.unparkTheVehicle(vehicle);
     }
 
     public int getNumberOfOccupiedLots(){
-        return parkingLot.getOccupiedLots();
+        return parkingSlot.getOccupiedLots();
     }
 
     public boolean checkAvailability(){
-        return (!(parkingLot.isFull()));
+        return (!(parkingSlot.isFull()));
     }
 
 }

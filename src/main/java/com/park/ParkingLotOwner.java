@@ -38,8 +38,8 @@ public class ParkingLotOwner {
     }
 
 
-    public ParkingLot getDetails(){
-        return parkingLotService.parkingLot.getTotalVehiclesParked();
+    public ParkingSlot getDetails(){
+        return parkingLotService.parkingSlot.getTotalVehiclesParked();
     }
 
 
