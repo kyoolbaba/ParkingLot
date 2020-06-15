@@ -230,31 +230,7 @@ public class ParkingRepositoryTest {
     }
 
     @Test
-    public void givenListOfParkingLots_whenSearched_ShouldReturnCountOfWhiteColor() {
-        try{
-            List<ParkingSlot> listOfParkingSlots = new ArrayList();
-            ParkingSlot lot1=new ParkingSlot(2,1,2);
-            lot1.listOfParkingLots.add(new Vehicle("KA04HB1234",Driver.NORMAL,2,Vehicle.VehicleColor.WHITE));
-            lot1.listOfParkingLots.add(new Vehicle("KA04HB134",Driver.NORMAL,2,Vehicle.VehicleColor.RED));
-            ParkingSlot lot2=new ParkingSlot(3,1,2,4);
-            lot2.listOfParkingLots.add(new Vehicle("KA04HB134",Driver.NORMAL,2,Vehicle.VehicleColor.WHITE));
-            lot2.listOfParkingLots.add(new Vehicle("KA04HB13",Driver.NORMAL,2,Vehicle.VehicleColor.WHITE));
-            lot2.listOfParkingLots.add(new Vehicle("KA04HB163",Driver.NORMAL,2));
-            ParkingSlot lot3=new ParkingSlot(4,1,2,3,1);
-            lot3.listOfParkingLots.add(new Vehicle("KA04HB1134",Driver.NORMAL,2));
-            lot3.listOfParkingLots.add(new Vehicle("KA04PB134",Driver.NORMAL,2,Vehicle.VehicleColor.BLACK));
-            listOfParkingSlots.add(lot1);
-            listOfParkingSlots.add(lot2);;
-            listOfParkingSlots.add(lot3);
-            ParkingLot parkingLot = new ParkingLot(listOfParkingSlots);
-            List<Vehicle> listOfVehicles= parkingLot.
-                    getVehicleDetails();
-            Assert.assertEquals(3,listOfVehicles.size());
-        }catch(ParkingLotException e){}
-    }
-
-    @Test
-    public void givenListOfParkingLots_whenSearched_ShouldReturnVehiclesWithWhiteColor() {
+    public void givenListOfParkingLots_whenSearched_ShouldReturnVehiclesPresent() {
         try{
             List<ParkingSlot> listOfParkingSlots = new ArrayList();
             ParkingSlot lot1=new ParkingSlot(2,1,2);
@@ -273,7 +249,7 @@ public class ParkingRepositoryTest {
             ParkingLot parkingLot = new ParkingLot(listOfParkingSlots);
             List<Vehicle> listOfVehicles= parkingLot.
                     getVehicleDetails();
-            Assert.assertEquals(2,listOfVehicles.size());
+            Assert.assertEquals(7,listOfVehicles.size());
         }catch(ParkingLotException e){}
     }
 

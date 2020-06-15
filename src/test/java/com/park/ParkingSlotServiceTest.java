@@ -316,9 +316,9 @@ public class ParkingSlotServiceTest {
             parkingLotService.parkTheVehicle(new Vehicle("KA04HL1025",Driver.NORMAL,2,
                     Vehicle.VehicleColor.BLUE).setVehicleName("TOYOTA"));
             parkingLotService.parkTheVehicle(new Vehicle("KA04HL1026",Driver.NORMAL,2,
-                    Vehicle.VehicleColor.WHITE).setVehicleName("TOYOTA"));
+                    Vehicle.VehicleColor.BLUE).setVehicleName("TOYOTA"));
             parkingLotService.parkTheVehicle(new Vehicle("KA04HL1027",Driver.NORMAL,2,
-                    Vehicle.VehicleColor.WHITE).setVehicleName("TOYOTA"));
+                    Vehicle.VehicleColor.BLUE).setVehicleName("TOYOTA"));
             List<Vehicle> listOfVehiclesOfSameColor =new ParkingLotOwner(parkingLotService).getDetails().
                     selectByColor(Vehicle.VehicleColor.BLUE).selectByName("toyota").totalVehiclesPresent;
             Assert.assertEquals("1_2",listOfVehiclesOfSameColor.get(0).getVehicleLocation());
@@ -347,18 +347,18 @@ public class ParkingSlotServiceTest {
             parkingLotService.parkTheVehicle(new Vehicle("KA04HB124",Driver.NORMAL,6,
                     Vehicle.VehicleColor.WHITE).setVehicleName("MARUTI"));
             parkingLotService.parkTheVehicle(new Vehicle("KA04HL1054",Driver.NORMAL,2,
-                    Vehicle.VehicleColor.WHITE).setVehicleName("BMW"));
+                    Vehicle.VehicleColor.BLUE).setVehicleName("BMW"));
             parkingLotService.parkTheVehicle(new Vehicle("KA04HL1025",Driver.NORMAL,2,
-                    Vehicle.VehicleColor.WHITE).setVehicleName("TOYOTA"));
+                    Vehicle.VehicleColor.BLACK).setVehicleName("TOYOTA"));
             parkingLotService.parkTheVehicle(new Vehicle("KA04HL1026",Driver.NORMAL,2,
                     Vehicle.VehicleColor.WHITE).setVehicleName("TOYOTA"));
             parkingLotService.parkTheVehicle(new Vehicle("KA04HL1027",Driver.NORMAL,2,
                     Vehicle.VehicleColor.WHITE).setVehicleName("TOYOTA"));
             ParkingLotOwner parkingLotOwner =new ParkingLotOwner(parkingLotService);
             List<Vehicle> listOfVehicles=parkingLotOwner.getDetails().selectByColor(Vehicle.VehicleColor.WHITE).totalVehiclesPresent;
-            Assert.assertEquals(2,listOfVehicles.size());
+            Assert.assertEquals(3,listOfVehicles.size());
             Assert.assertEquals("KA04HB124",listOfVehicles.get(0).getVehicleNumber());
-            Assert.assertEquals("KA04HL1054",listOfVehicles.get(1).getVehicleNumber());
+            Assert.assertEquals("KA04HL1026",listOfVehicles.get(1).getVehicleNumber());
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
         }
