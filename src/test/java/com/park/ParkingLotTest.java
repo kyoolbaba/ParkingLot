@@ -135,7 +135,7 @@ public class ParkingLotTest {
             listOfParkingSlots.add(lot3);
             ParkingLot parkingLot = new ParkingLot(listOfParkingSlots);
             Assert.assertEquals(lot2, parkingLot.
-                    alotTheLotToPark(new Vehicle("KA04HB1134",Driver.NORMAL,VehicleSize.LARGE,
+                    assignLot(new Vehicle("KA04HB1134",Driver.NORMAL,VehicleSize.LARGE,
                             Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.HYUNDAI)));
         }catch(ParkingLotException e){}
 
@@ -169,7 +169,7 @@ public class ParkingLotTest {
             listOfParkingSlots.add(lot3);
             ParkingLot parkingLot = new ParkingLot(listOfParkingSlots);
             Assert.assertNotEquals(lot3, parkingLot.
-                    alotTheLotToPark(new Vehicle("KA04HB1134",Driver.NORMAL,VehicleSize.LARGE,
+                    assignLot(new Vehicle("KA04HB1134",Driver.NORMAL,VehicleSize.LARGE,
                             Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.HYUNDAI)));
         }catch(ParkingLotException e){}
     }
@@ -200,7 +200,7 @@ public class ParkingLotTest {
             listOfParkingSlots.add(lot3);
             ParkingLot parkingLot = new ParkingLot(listOfParkingSlots);
             Assert.assertEquals(lot3,  parkingLot.
-                    alotTheLotToPark(new Vehicle("KA04HB1134",Driver.NORMAL,VehicleSize.LARGE,
+                    assignLot(new Vehicle("KA04HB1134",Driver.NORMAL,VehicleSize.LARGE,
                             Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.BMW)));
         }catch(ParkingLotException e){}
     }
@@ -231,7 +231,7 @@ public class ParkingLotTest {
             listOfParkingSlots.add(lot3);
             ParkingLot parkingLot = new ParkingLot(listOfParkingSlots);
             Assert.assertEquals(lot3,  parkingLot.
-                    alotTheLotToPark(new Vehicle("KA04HB1134",Driver.NORMAL,VehicleSize.LARGE,
+                    assignLot(new Vehicle("KA04HB1134",Driver.NORMAL,VehicleSize.LARGE,
                             Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW)));
         }catch(ParkingLotException e){}
     }

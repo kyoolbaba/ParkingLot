@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.park.ParkingSlotTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-06-16T12:32:20" hostname="KYOOLBABA" time="0.759">
+  <properties/>
+  <testcase name="givenVehicle_whenParkedTheVehicle_ShouldAddTheVehicleIntheSlot" classname="com.park.ParkingSlotTest" time="0.744"/>
+  <testcase name="givenVehicleObjectNull_whenAdded_shouldThrowException" classname="com.park.ParkingSlotTest" time="0.004"/>
+  <testcase name="givenVehicleNumberEmpty_whenAdded_shouldThrowException" classname="com.park.ParkingSlotTest" time="0.002"/>
+  <testcase name="givenVehicleNumberNull_whenAdded_shouldThrowException" classname="com.park.ParkingSlotTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

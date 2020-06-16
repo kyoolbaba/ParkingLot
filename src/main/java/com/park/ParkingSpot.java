@@ -2,7 +2,6 @@ package com.park;
 
 public class ParkingSpot {
     private boolean displayFullSign;
-    private int PARKING_CHARGES_PER_DAY=10;
     ParkingLotService parkingLotService;
 
     public ParkingSpot(ParkingLotService parkingLotService) {
@@ -16,21 +15,21 @@ public class ParkingSpot {
         this.displayFullSign = displayFullSign;
     }
 
-    public void assignLotNumber(int[] lots, Vehicle vehicle, Integer[] slotCapacity){
+    public void assignLotNumber(int[] slots, Vehicle vehicle, Integer[] slotCapacity){
         int i;
         if(vehicle.getDriver().equals(Driver.NORMAL)){
-        for( i=lots.length-1;i>=0;i--){
-            if(lots[i]!=slotCapacity[i]&&(slotCapacity[i]>=(lots[i]+vehicle.getVehicleSize().getSize()))){
+        for( i=slots.length-1;i>=0;i--){
+            if(slots[i]!=slotCapacity[i]&&(slotCapacity[i]>=(slots[i]+vehicle.getVehicleSize().getSize()))){
                 vehicle.setSlotNumber(i+1);
-                lots[i] +=1;
+                slots[i] +=1;
                 break;
             }
         }
         }else if(vehicle.getDriver().equals(Driver.HANDICAPPED)){
-            for( i=0;i<=lots.length-1;i++){
-                if(lots[i]!=1*slotCapacity[i]&&(slotCapacity[i]<=(lots[i]+vehicle.getVehicleSize().getSize()))){
+            for( i=0;i<=slots.length-1;i++){
+                if(slots[i]!=1*slotCapacity[i]&&(slotCapacity[i]<=(slots[i]+vehicle.getVehicleSize().getSize()))){
                     vehicle.setSlotNumber(i+1);
-                    lots[i] +=1;
+                    slots[i] +=1;
                     break;
                 }
             }

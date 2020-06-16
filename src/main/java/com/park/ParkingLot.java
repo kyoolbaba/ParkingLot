@@ -8,6 +8,7 @@ public class ParkingLot {
 
     private List<ParkingSlot> listOfLots;
     private int lotNumber;
+    ParkingLot parkingLot;
 
     public int getLotNumber() {
         return lotNumber;
@@ -15,6 +16,9 @@ public class ParkingLot {
 
     public ParkingLot(List<ParkingSlot> listOfLots) {
         this.listOfLots = listOfLots;
+    }
+
+    public ParkingLot() {
     }
 
     public boolean checkVehiclePresent(Vehicle vehicle){
@@ -26,7 +30,7 @@ public class ParkingLot {
                 listOfParkingLots.size()==listOfVehiclesInLot.sizeOfParkingLot);
     }
 
-    public ParkingSlot alotTheLotToPark(Vehicle vehicle) throws ParkingLotException {
+    public ParkingSlot assignLot(Vehicle vehicle) throws ParkingLotException {
          lotNumber=0;
          int sizeCheck=0;
         int size=(int)Double.POSITIVE_INFINITY;

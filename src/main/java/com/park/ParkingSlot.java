@@ -7,17 +7,20 @@ import java.util.stream.Collectors;
 
 public class ParkingSlot {
      int sizeOfParkingLot;
-    ParkingSpot parkingSpot;
+     ParkingSpot parkingSpot;
      Integer[] slotCapacity;
-    List<Vehicle> listOfParkingLots ;
-    List<Vehicle> totalVehiclesPresent;
-    private int[] slots;
-    ParkingLot parkingLot;
+     List<Vehicle> listOfParkingLots ;
+     List<Vehicle> totalVehiclesPresent;
+     private int[] slots;
+     ParkingLot parkingLot;
+
 
     public ParkingSlot(List<ParkingSlot> parkingSlots) {
         parkingSpot =new ParkingSpot();
         parkingLot =new ParkingLot(parkingSlots);
     }
+
+    public ParkingSlot() { }
 
     public ParkingSlot(int sizeOfParkingLot, Integer...slotCapacities) throws ParkingLotException {
         listOfParkingLots= new ArrayList();
@@ -38,7 +41,7 @@ public class ParkingSlot {
                     ,ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN);
         if(this.isFull())
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
-        ParkingSlot vehicleToBeParkedInThisLot= parkingLot.alotTheLotToPark(vehicle);
+        ParkingSlot vehicleToBeParkedInThisLot= parkingLot.assignLot(vehicle);
         parkingSpot.assignLotNumber(vehicleToBeParkedInThisLot.slots,vehicle,vehicleToBeParkedInThisLot.slotCapacity);
         vehicle.setLotNumber(parkingLot.getLotNumber()+1);
         vehicleToBeParkedInThisLot.listOfParkingLots.add(vehicle);
