@@ -11,7 +11,6 @@ public class Vehicle {
     private Driver handicapped;
     private int lotNumber;
     private VehicleName vehicleName;
-    private String attendentName;
     private VehicleSize vehicleSize;
 
     public Vehicle(String vehicleNumber, Driver handicapped,VehicleSize vehicleSize

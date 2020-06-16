@@ -43,11 +43,10 @@ public class ParkingSlot {
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
         ParkingSlot vehicleToBeParkedInThisLot= parkingLot.assignLot(vehicle);
         parkingSpot.assignLotNumber(vehicleToBeParkedInThisLot.slots,vehicle,vehicleToBeParkedInThisLot.slotCapacity);
-        vehicle.setLotNumber(parkingLot.getLotNumber()+1);
+        vehicle.setLotNumber(parkingLot.getSlotNumber()+1);
         vehicleToBeParkedInThisLot.listOfParkingLots.add(vehicle);
         if(this.isFull()) {
             this.sendStatusToParkingManager();
-            this.redirectStaff();
         }
     }
 
@@ -60,7 +59,6 @@ public class ParkingSlot {
                     ,ParkingLotException.ExceptionType.VEHICLE_NOT_PRESENT);
         if(!this.isFull()) {
             this.sendStatusToParkingManager();
-            this.redirectStaff();
         }
         ParkingSlot vehiclesParkedLot= parkingLot.getLotOfTheVehiclePresent(vehicle);
         int lotNumber=0;
@@ -89,9 +87,6 @@ public class ParkingSlot {
           return new ParkingManager(this.isFull());
     }
 
-    public AirportSecurity redirectStaff(){
-        return new AirportSecurity(!isFull());
-    }
 
     public ParkingSlot getTotalVehiclesParked() {
         totalVehiclesPresent= parkingLot.getVehicleDetails();

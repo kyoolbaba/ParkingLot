@@ -7,11 +7,10 @@ import java.util.stream.Collectors;
 public class ParkingLot {
 
     private List<ParkingSlot> listOfLots;
-    private int lotNumber;
-    ParkingLot parkingLot;
+    private int slotNumber;
 
-    public int getLotNumber() {
-        return lotNumber;
+    public int getSlotNumber() {
+        return slotNumber;
     }
 
     public ParkingLot(List<ParkingSlot> listOfLots) {
@@ -31,17 +30,35 @@ public class ParkingLot {
     }
 
     public ParkingSlot assignLot(Vehicle vehicle) throws ParkingLotException {
-         lotNumber=0;
+         slotNumber =0;
          int sizeCheck=0;
+         boolean maneuver=false;
         int size=(int)Double.POSITIVE_INFINITY;
         for(int i=listOfLots.size()-1;i>=0;i--){
             ParkingSlot park=listOfLots.get(i);
-            List<Integer> list= Arrays.asList(park.slotCapacity);
-            Integer maxSizeSlot = list.stream().mapToInt(maximum->maximum).max().orElse(Integer.MAX_VALUE);
+            List<Integer> listOfSlotCapacity= Arrays.asList(park.slotCapacity);
+            if(park.slots[park.slots.length-1]==0&&park.slotCapacity[park.slots.length-1]>=vehicle.getVehicleSize()
+                    .getSize()&&vehicle.getVehicleSize().equals(VehicleSize.LARGE)) {
+                maneuver=true;
+                slotNumber =i;
+            }
+            if(park.slots[0]==0&&park.slotCapacity[0]>=vehicle.getVehicleSize().getSize()&&vehicle.getVehicleSize()
+                    .equals(VehicleSize.LARGE)) {
+                maneuver=true;
+                slotNumber =i;
+            }
+            for(int j=1;j<=park.slots.length-2;j++){
+                if(park.slots[j]==0&&park.slots[j-1]==0&&park.slots[j+1]==0&&park.slotCapacity[j]>=vehicle.
+                        getVehicleSize().getSize()&&vehicle.getVehicleSize().equals(VehicleSize.LARGE)){
+                    maneuver=true;
+                    slotNumber =i;}
+            }
+            if(maneuver) break;
+            Integer maxSizeSlot = listOfSlotCapacity.stream().mapToInt(maximum->maximum).max().orElse(Integer.MAX_VALUE);
             if(park.listOfParkingLots.size()<=size&&(!(park.listOfParkingLots.size()>=park.sizeOfParkingLot))
                     &&(vehicle.getVehicleSize().getSize()<=maxSizeSlot)){
                 size=park.listOfParkingLots.size();
-                lotNumber=i;
+                slotNumber =i;
                 sizeCheck--;
             }
             sizeCheck++;
@@ -49,7 +66,7 @@ public class ParkingLot {
         if(sizeCheck==listOfLots.size())
             throw new ParkingLotException("Parking slot vehicle is not suitable with any Lot"
                     ,ParkingLotException.ExceptionType.PARKING_SIZE_NOT_AVAILABLE);
-    return listOfLots.get(lotNumber);
+    return listOfLots.get(slotNumber);
     }
 
     public ParkingSlot getLotOfTheVehiclePresent(Vehicle vehicle){
@@ -62,8 +79,6 @@ public class ParkingLot {
         }
         return parkingSlot;
     }
-
-
 
     public List getVehicleDetails(){
         List<Vehicle> listOfVehicles=new ArrayList<>();

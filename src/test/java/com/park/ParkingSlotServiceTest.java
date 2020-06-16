@@ -74,8 +74,7 @@ public class ParkingSlotServiceTest {
                     Vehicle.VehicleColor.WHITE,Vehicle.VehicleName.MARUTI));
             parkingLotService.parkTheVehicle(new Vehicle("KA04HB1004",Driver.NORMAL,VehicleSize.SMALL,
                     Vehicle.VehicleColor.RED,Vehicle.VehicleName.MARUTI));
-            Vehicle vehicle=parkingLotService.unParkTheVehicle(new Vehicle("KA04HB1004",Driver.NORMAL,VehicleSize.SMALL,
-                    Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
+            Vehicle vehicle=parkingLotService.unParkTheVehicle(new Vehicle("KA04HB1004"));
             Assert.assertEquals(2,vehicle.getSlotNumber());
             Assert.assertEquals(2,vehicle.getLotNumber());
         }catch(ParkingLotException e){
@@ -370,10 +369,10 @@ public class ParkingSlotServiceTest {
                     selectByColor(Vehicle.VehicleColor.BLUE).selectByName(Vehicle.VehicleName.TOYOTA).totalVehiclesPresent;
             Assert.assertEquals("1_2",listOfVehiclesOfSameColor.get(0).getVehicleLocation());
             Assert.assertEquals("2_2",listOfVehiclesOfSameColor.get(1).getVehicleLocation());
-            Assert.assertEquals("3_1",listOfVehiclesOfSameColor.get(2).getVehicleLocation());
+            Assert.assertEquals("2_2",listOfVehiclesOfSameColor.get(2).getVehicleLocation());
             Assert.assertEquals("KA04HL1026",listOfVehiclesOfSameColor.get(0).getVehicleNumber());
-            Assert.assertEquals("KA04HL1027",listOfVehiclesOfSameColor.get(1).getVehicleNumber());
-            Assert.assertEquals("KA04HL1025",listOfVehiclesOfSameColor.get(2).getVehicleNumber());
+            Assert.assertEquals("KA04HL1025",listOfVehiclesOfSameColor.get(1).getVehicleNumber());
+            Assert.assertEquals("KA04HL1027",listOfVehiclesOfSameColor.get(2).getVehicleNumber());
             Assert.assertEquals(3,listOfVehiclesOfSameColor.size());
         }catch(ParkingLotException e){
             Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
@@ -435,7 +434,7 @@ public class ParkingSlotServiceTest {
                     Vehicle.VehicleColor.BLUE,Vehicle.VehicleName.BMW));
             List<Vehicle> listOfBMWVehicles =new ParkingManager(parkingLotService).getDetails().
                     selectByName(Vehicle.VehicleName.BMW).totalVehiclesPresent;
-            Assert.assertEquals("2_2",listOfBMWVehicles.get(0).getVehicleLocation());
+            Assert.assertEquals("1_2",listOfBMWVehicles.get(0).getVehicleLocation());
             Assert.assertEquals("KA04HL1054",listOfBMWVehicles.get(0).getVehicleNumber());
             Assert.assertEquals(2,listOfBMWVehicles.size());
         }catch(ParkingLotException e){
@@ -517,8 +516,8 @@ public class ParkingSlotServiceTest {
                     selectBySize(2).selectBySlotNumber(1).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
             List<Vehicle> listOfVehiclesPresentAtDSlot =new ParkingManager(parkingLotService).getDetails().
                     selectBySize(2).selectBySlotNumber(4).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
-           // Assert.assertEquals("KA03HL1027",listOfVehiclesPresentAtDSlot.get(0).getVehicleNumber());
-           // Assert.assertEquals("KA04HL127",listOfVehiclesPresentAtBSlot.get(0).getVehicleNumber());
+//            Assert.assertEquals("KA03HL1027",listOfVehiclesPresentAtDSlot.get(0).getVehicleNumber());
+        //    Assert.assertEquals("KA04HL127",listOfVehiclesPresentAtBSlot.get(0).getVehicleNumber());
            // Assert.assertEquals("KA04KL1027",listOfVehiclesPresentAtBSlot.get(1).getVehicleNumber());
            // Assert.assertEquals("KA04HL1327",listOfVehiclesPresentAtBSlot.get(2).getVehicleNumber());
             Assert.assertEquals(1,listOfVehiclesPresentAtDSlot.size());
