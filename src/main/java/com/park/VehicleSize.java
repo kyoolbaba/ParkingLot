@@ -1,11 +1,11 @@
 package com.park;
 
-public enum VehicleAssets {
+public enum VehicleSize {
     SMALL(1),MEDIUM(2),LARGE(3);
 
     private final int vehicleSize;
 
-    VehicleAssets(int vehicleSize) {
+    VehicleSize(int vehicleSize) {
         this.vehicleSize = vehicleSize;
     }
 

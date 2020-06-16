@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class ParkingSlot {
      int sizeOfParkingLot;
-    ParkingLotOwner parkingLotOwner;
+    ParkingSpot parkingSpot;
      Integer[] slotCapacity;
     List<Vehicle> listOfParkingLots ;
     List<Vehicle> totalVehiclesPresent;
@@ -15,7 +15,7 @@ public class ParkingSlot {
     ParkingLot parkingLot;
 
     public ParkingSlot(List<ParkingSlot> parkingSlots) {
-        parkingLotOwner=new ParkingLotOwner();
+        parkingSpot =new ParkingSpot();
         parkingLot =new ParkingLot(parkingSlots);
     }
 
@@ -38,8 +38,8 @@ public class ParkingSlot {
                     ,ParkingLotException.ExceptionType.VEHICLE_ALREADY_IN);
         if(this.isFull())
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
-        ParkingSlot vehicleToBeParkedInThisLot= parkingLot.selectLot(vehicle);
-        parkingLotOwner.assignLotNumber(vehicleToBeParkedInThisLot.slots,vehicle,vehicleToBeParkedInThisLot.slotCapacity);
+        ParkingSlot vehicleToBeParkedInThisLot= parkingLot.alotTheLotToPark(vehicle);
+        parkingSpot.assignLotNumber(vehicleToBeParkedInThisLot.slots,vehicle,vehicleToBeParkedInThisLot.slotCapacity);
         vehicle.setLotNumber(parkingLot.getLotNumber()+1);
         vehicleToBeParkedInThisLot.listOfParkingLots.add(vehicle);
         if(this.isFull()) {
@@ -59,13 +59,13 @@ public class ParkingSlot {
             this.sendStatusToParkingOwner();
             this.redirectStaff();
         }
-        ParkingSlot vehiclesParkedLot= parkingLot.getLotOfVehicle(vehicle);
+        ParkingSlot vehiclesParkedLot= parkingLot.getLotOfTheVehiclePresent(vehicle);
         int lotNumber=0;
         Vehicle vehicleTobeUnparked=null;
         for(Vehicle vehicles:vehiclesParkedLot.listOfParkingLots){
             if(vehicles.equals(vehicle)){
                 vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]= vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]
-                        -(1*vehicles.getVehicleSize());
+                        -(1*vehicles.getVehicleSize().getSize());
                 vehicleTobeUnparked=vehicles;
                 vehiclesParkedLot.listOfParkingLots.remove(vehicles);
                 break;
@@ -82,8 +82,8 @@ public class ParkingSlot {
         return parkingLot.checkParkingFullOrNot();
     }
 
-    public ParkingLotOwner sendStatusToParkingOwner(){
-          return new ParkingLotOwner(this.isFull());
+    public ParkingSpot sendStatusToParkingOwner(){
+          return new ParkingSpot(this.isFull());
     }
 
     public AirportSecurity redirectStaff(){
@@ -101,9 +101,9 @@ public class ParkingSlot {
         return this;
     }
 
-    public ParkingSlot selectByName(String vehicleName){
+    public ParkingSlot selectByName(Vehicle.VehicleName vehicleName){
         totalVehiclesPresent=totalVehiclesPresent.stream().filter(name->name.getVehicleName()
-                .equals(vehicleName.toUpperCase())).collect(Collectors.toList());
+                .equals(vehicleName)).collect(Collectors.toList());
         return this;
     }
 
@@ -127,7 +127,7 @@ public class ParkingSlot {
 
     public ParkingSlot selectBySize(int size){
         totalVehiclesPresent=totalVehiclesPresent.stream().
-                filter(siz->siz.getVehicleSize()==size).collect(Collectors.toList());
+                filter(siz->siz.getVehicleSize().getSize()==size).collect(Collectors.toList());
         return this;
     }
 

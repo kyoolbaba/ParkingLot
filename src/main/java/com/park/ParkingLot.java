@@ -26,7 +26,7 @@ public class ParkingLot {
                 listOfParkingLots.size()==listOfVehiclesInLot.sizeOfParkingLot);
     }
 
-    public ParkingSlot selectLot(Vehicle vehicle) throws ParkingLotException {
+    public ParkingSlot alotTheLotToPark(Vehicle vehicle) throws ParkingLotException {
          lotNumber=0;
          int sizeCheck=0;
         int size=(int)Double.POSITIVE_INFINITY;
@@ -35,7 +35,7 @@ public class ParkingLot {
             List<Integer> list= Arrays.asList(park.slotCapacity);
             Integer maxSizeSlot = list.stream().mapToInt(maximum->maximum).max().orElse(Integer.MAX_VALUE);
             if(park.listOfParkingLots.size()<=size&&(!(park.listOfParkingLots.size()>=park.sizeOfParkingLot))
-                    &&(vehicle.getVehicleSize()<=maxSizeSlot)){
+                    &&(vehicle.getVehicleSize().getSize()<=maxSizeSlot)){
                 size=park.listOfParkingLots.size();
                 lotNumber=i;
                 sizeCheck--;
@@ -48,7 +48,7 @@ public class ParkingLot {
     return listOfLots.get(lotNumber);
     }
 
-    public ParkingSlot getLotOfVehicle(Vehicle vehicle){
+    public ParkingSlot getLotOfTheVehiclePresent(Vehicle vehicle){
         ParkingSlot parkingSlot =null;
         for(ParkingSlot park:listOfLots){
             if(park.listOfParkingLots.contains(vehicle)){
