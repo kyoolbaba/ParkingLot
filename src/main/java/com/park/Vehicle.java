@@ -23,6 +23,10 @@ public class Vehicle {
         this.vehicleName = vehicleName;
     }
 
+    public Vehicle(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
+    }
+
     enum VehicleColor{
         GREEN,RED,WHITE,BLUE,BLACK;
     }

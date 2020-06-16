@@ -81,6 +81,61 @@ public class ParkingSlotTest {
         }
     }
 
+    @Test
+    public void givenVehicleDetails_whenUnparked_shouldReturnVehiclesDetails() {
+        try {
+            List<Vehicle> listOfVehiclesInSlot = new ArrayList<>();
+            Vehicle vehicle1=new Vehicle("KA04HB21",Driver.NORMAL,VehicleSize.SMALL
+                    , Vehicle.VehicleColor.WHITE,Vehicle.VehicleName.MARUTI);
+            Vehicle vehicle2=new Vehicle("KA04HB021",Driver.NORMAL,VehicleSize.SMALL
+                    , Vehicle.VehicleColor.WHITE,Vehicle.VehicleName.MARUTI);
+            Vehicle vehicle3=new Vehicle("KA04HB221",Driver.NORMAL,VehicleSize.SMALL
+                    , Vehicle.VehicleColor.WHITE,Vehicle.VehicleName.MARUTI);
+            vehicle2.setSlotNumber(2);
+            listOfVehiclesInSlot.add(vehicle1);
+            listOfVehiclesInSlot.add(vehicle2);
+            listOfVehiclesInSlot.add(vehicle3);
+            ParkingSlot vehiclesSlot=new ParkingSlot();
+            vehiclesSlot.listOfParkingLots=listOfVehiclesInSlot;
+            vehiclesSlot.slots=new int[3];
+            vehiclesSlot.slotCapacity= new Integer[]{1,2,3};
+            when(parkingLot.checkVehiclePresent(new Vehicle("KA04HB021"))).thenReturn(true);
+            when(parkingLot.checkParkingFullOrNot()).thenReturn(false);
+            when(parkingLot.getLotOfTheVehiclePresent(any(Vehicle.class))).thenReturn(vehiclesSlot);
+            Assert.assertEquals(3,vehiclesSlot.listOfParkingLots.size());
+            Vehicle unparkedVehicle = parkingSlot.unparkTheVehicle(new Vehicle("KA04HB021"));
+            Assert.assertEquals("KA04HB021",unparkedVehicle.getVehicleNumber());
+            Assert.assertEquals(2,vehiclesSlot.listOfParkingLots.size());
+        }catch(ParkingLotException e){
+        }
+    }
+
+    @Test
+    public void givenVehiclesObjectAsNull_whenUnparked_shouldThrowException() {
+        try{
+            parkingSlot.unparkTheVehicle(null);
+        }catch(ParkingLotException e){
+            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
+        }
+    }
+
+    @Test
+    public void givenVehiclesDetailsEmpty_whenUnparked_shouldThrowException() {
+        try{
+            parkingSlot.unparkTheVehicle(new Vehicle(""));
+        }catch(ParkingLotException e){
+            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
+        }
+    }
+
+    @Test
+    public void givenVehiclesDetailsNull_whenUnparked_shouldThrowException() {
+        try{
+            parkingSlot.unparkTheVehicle(new Vehicle(null));
+        }catch(ParkingLotException e){
+            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
+        }
+    }
 
 
 }

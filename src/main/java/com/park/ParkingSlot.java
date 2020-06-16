@@ -11,7 +11,7 @@ public class ParkingSlot {
      Integer[] slotCapacity;
      List<Vehicle> listOfParkingLots ;
      List<Vehicle> totalVehiclesPresent;
-     private int[] slots;
+     int[] slots;
      ParkingLot parkingLot;
 
 
@@ -58,7 +58,7 @@ public class ParkingSlot {
         if(!(parkingLot.checkVehiclePresent(vehicle)))
             throw new ParkingLotException("Vehicle Not Present"
                     ,ParkingLotException.ExceptionType.VEHICLE_NOT_PRESENT);
-        if(this.isFull()) {
+        if(!this.isFull()) {
             this.sendStatusToParkingOwner();
             this.redirectStaff();
         }
@@ -130,7 +130,7 @@ public class ParkingSlot {
 
     public ParkingSlot selectBySize(int size){
         totalVehiclesPresent=totalVehiclesPresent.stream().
-                filter(siz->siz.getVehicleSize().getSize()==size).collect(Collectors.toList());
+                filter(sizeOfVehicle->sizeOfVehicle.getVehicleSize().getSize()==size).collect(Collectors.toList());
         return this;
     }
 
