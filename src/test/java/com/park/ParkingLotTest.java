@@ -41,7 +41,7 @@ public class ParkingLotTest {
              when(parkingSlot.checkVehiclePresent(vehicle1)).thenReturn(false);
              when(parkingSlot.checkParkingFullOrNot()).thenReturn(false);
              when(parkingSlot.assignSlot(any(Vehicle.class))).thenReturn(parkingLot2);
-             doNothing().when(parkingSpot).assignLotNumber(any(int[].class),any(Vehicle.class),any(Integer[].class));
+             doNothing().when(parkingSpot).assignSpotNumber(any(int[].class),any(Vehicle.class),any(Integer[].class));
              parkingLot.parkTheVehicle(vehicle1);
              parkingLot.parkTheVehicle(vehicle2);
              parkingLot.parkTheVehicle(vehicle3);
@@ -90,7 +90,7 @@ public class ParkingLotTest {
                     , Vehicle.VehicleColor.WHITE,Vehicle.VehicleName.MARUTI);
             Vehicle vehicle3=new Vehicle("KA04HB221",Driver.NORMAL,VehicleSize.SMALL
                     , Vehicle.VehicleColor.WHITE,Vehicle.VehicleName.MARUTI);
-            vehicle2.setSlotNumber(2);
+            vehicle2.setSpotNumber(2);
             listOfVehiclesInSlot.add(vehicle1);
             listOfVehiclesInSlot.add(vehicle2);
             listOfVehiclesInSlot.add(vehicle3);
@@ -287,15 +287,15 @@ public class ParkingLotTest {
                     Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW));
         Vehicle vehicle9=(new Vehicle("KA04HL1026",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW));
-        vehicle1.setSlotNumber(2);
-        vehicle2.setSlotNumber(4);
-        vehicle3.setSlotNumber(2);
-        vehicle4.setSlotNumber(3);
-        vehicle5.setSlotNumber(2);
-        vehicle6.setSlotNumber(1);
-        vehicle7.setSlotNumber(2);
-        vehicle8.setSlotNumber(4);
-        vehicle9.setSlotNumber(3);
+        vehicle1.setSpotNumber(2);
+        vehicle2.setSpotNumber(4);
+        vehicle3.setSpotNumber(2);
+        vehicle4.setSpotNumber(3);
+        vehicle5.setSpotNumber(2);
+        vehicle6.setSpotNumber(1);
+        vehicle7.setSpotNumber(2);
+        vehicle8.setSpotNumber(4);
+        vehicle9.setSpotNumber(3);
         listOfVehiclesPresent.add(vehicle1);
         listOfVehiclesPresent.add(vehicle2);
         listOfVehiclesPresent.add(vehicle3);

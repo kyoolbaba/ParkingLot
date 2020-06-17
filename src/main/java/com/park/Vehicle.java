@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Vehicle {
     private String vehicleNumber;
-    private int slotNumber;
+    private int spotNumber;
     private VehicleColor vehicleColor;
     private int duration;
     private String vehicleLocation ="";
     private Driver handicapped;
-    private int lotNumber;
+    private int slotNumber;
     private VehicleName vehicleName;
     private VehicleSize vehicleSize;
 
@@ -52,19 +52,19 @@ public class Vehicle {
     }
 
     public String getVehicleLocation(){
-        return Integer.toString(this.lotNumber)+"_"+Integer.toString(this.slotNumber);
+        return Integer.toString(this.slotNumber)+"_"+Integer.toString(this.spotNumber);
     }
 
     public VehicleSize getVehicleSize() {
         return vehicleSize;
     }
 
-    public int getLotNumber() {
-        return lotNumber;
+    public int getSlotNumber() {
+        return slotNumber;
     }
 
-    public void setLotNumber(int lotNumber) {
-        this.lotNumber = lotNumber;
+    public void setSlotNumber(int slotNumber) {
+        this.slotNumber = slotNumber;
     }
 
     public Driver getDriver() {
@@ -75,12 +75,12 @@ public class Vehicle {
         return vehicleNumber;
     }
 
-    public int getSlotNumber() {
-        return slotNumber;
+    public int getSpotNumber() {
+        return spotNumber;
     }
 
-    public void setSlotNumber(int slotNumber) {
-        this.slotNumber = slotNumber;
+    public void setSpotNumber(int spotNumber) {
+        this.spotNumber = spotNumber;
     }
 
     @Override

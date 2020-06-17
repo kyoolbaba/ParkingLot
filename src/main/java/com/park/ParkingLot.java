@@ -45,8 +45,8 @@ public class ParkingLot  {
         if(this.isFull())
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
         ParkingLot vehicleToBeParkedInThisSlot= parkingSlot.assignSlot(vehicle);
-            parkingSpot.assignLotNumber(vehicleToBeParkedInThisSlot.slots,vehicle,vehicleToBeParkedInThisSlot.slotCapacity);
-        vehicle.setLotNumber(parkingSlot.getSlotNumber()+1);
+            parkingSpot.assignSpotNumber(vehicleToBeParkedInThisSlot.slots,vehicle,vehicleToBeParkedInThisSlot.slotCapacity);
+        vehicle.setSlotNumber(parkingSlot.getSlotNumber()+1);
         vehicleToBeParkedInThisSlot.listOfVehiclesInSlot.add(vehicle);
         if(this.isFull()) {
             this.sendStatus();
@@ -68,7 +68,7 @@ public class ParkingLot  {
         Vehicle vehicleTobeUnparked=null;
         for(Vehicle vehicles:vehiclesParkedLot.listOfVehiclesInSlot){
             if(vehicles.equals(vehicle)){
-                vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]= vehiclesParkedLot.slots[vehicles.getSlotNumber()-1]
+                vehiclesParkedLot.slots[vehicles.getSpotNumber()-1]= vehiclesParkedLot.slots[vehicles.getSpotNumber()-1]
                         -(1*vehicles.getVehicleSize().getSize());
                 vehicleTobeUnparked=vehicles;
                 vehiclesParkedLot.listOfVehiclesInSlot.remove(vehicles);
@@ -117,7 +117,7 @@ public class ParkingLot  {
 
     public ParkingLot selectBySlotNumber(int slotNumber){
         totalVehiclesPresent=totalVehiclesPresent.stream().filter(slotNum->slotNum
-                .getSlotNumber()==slotNumber).collect(Collectors.toList());
+                .getSpotNumber()==slotNumber).collect(Collectors.toList());
         return this;
     }
 

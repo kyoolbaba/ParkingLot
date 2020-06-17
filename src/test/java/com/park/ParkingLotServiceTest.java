@@ -25,7 +25,7 @@ public class ParkingLotServiceTest {
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
             Vehicle vehicle= parkingLot.unParkTheVehicle(new Vehicle("KA04HB1024",Driver.NORMAL,
                     VehicleSize.SMALL,Vehicle.VehicleColor.WHITE,Vehicle.VehicleName.MARUTI));
-            Assert.assertEquals(2,vehicle.getSlotNumber());
+            Assert.assertEquals(2,vehicle.getSpotNumber());
         }catch(ParkingLotException e){
         }
     }
@@ -47,7 +47,7 @@ public class ParkingLotServiceTest {
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
             Vehicle vehicle=parkingLot.unParkTheVehicle(new Vehicle("KA04HB1024",Driver.HANDICAPPED,VehicleSize.SMALL,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.BMW));
-            Assert.assertEquals(2,vehicle.getSlotNumber());
+            Assert.assertEquals(2,vehicle.getSpotNumber());
         }catch(ParkingLotException e){
         }
     }
@@ -74,8 +74,8 @@ public class ParkingLotServiceTest {
             parkingLot.parkTheVehicle(new Vehicle("KA04HB1004",Driver.NORMAL,VehicleSize.SMALL,
                     Vehicle.VehicleColor.RED,Vehicle.VehicleName.MARUTI));
             Vehicle vehicle=parkingLot.unParkTheVehicle(new Vehicle("KA04HB1004"));
+            Assert.assertEquals(2,vehicle.getSpotNumber());
             Assert.assertEquals(2,vehicle.getSlotNumber());
-            Assert.assertEquals(2,vehicle.getLotNumber());
         }catch(ParkingLotException e){
         }
     }
@@ -97,7 +97,7 @@ public class ParkingLotServiceTest {
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
             Vehicle vehicle=parkingLot.unParkTheVehicle(new Vehicle("KA04HB1024",Driver.NORMAL,VehicleSize.SMALL,
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
-            Assert.assertEquals(2,vehicle.getLotNumber());
+            Assert.assertEquals(2,vehicle.getSlotNumber());
         }catch(ParkingLotException e){
         }
     }
@@ -123,7 +123,7 @@ public class ParkingLotServiceTest {
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
             Vehicle vehicle=parkingLot.unParkTheVehicle(new Vehicle("KA04HO1024",Driver.NORMAL,VehicleSize.SMALL,
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
-            Assert.assertEquals(1,vehicle.getLotNumber());
+            Assert.assertEquals(1,vehicle.getSlotNumber());
         }catch(ParkingLotException e){
         }
     }
@@ -241,8 +241,8 @@ public class ParkingLotServiceTest {
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
             Vehicle vehicle=parkingLot.unParkTheVehicle(new Vehicle("KA04HP1024",Driver.NORMAL,VehicleSize.SMALL,
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
-            Assert.assertEquals(2,vehicle.getLotNumber());
             Assert.assertEquals(2,vehicle.getSlotNumber());
+            Assert.assertEquals(2,vehicle.getSpotNumber());
         }catch(ParkingLotException e){
 
         }
@@ -265,8 +265,8 @@ public class ParkingLotServiceTest {
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
             Vehicle vehicle=parkingLot.unParkTheVehicle(new Vehicle("KA04HB124",Driver.NORMAL,VehicleSize.SMALL,
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
-            Assert.assertEquals(1,vehicle.getLotNumber());
             Assert.assertEquals(1,vehicle.getSlotNumber());
+            Assert.assertEquals(1,vehicle.getSpotNumber());
         }catch(ParkingLotException e){
 
         }
@@ -289,8 +289,8 @@ public class ParkingLotServiceTest {
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
             Vehicle vehicle=parkingLot.unParkTheVehicle(new Vehicle("KA04HB124",Driver.NORMAL,VehicleSize.SMALL,
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
-            Assert.assertEquals(3,vehicle.getLotNumber());
-            Assert.assertEquals(1,vehicle.getSlotNumber());
+            Assert.assertEquals(3,vehicle.getSlotNumber());
+            Assert.assertEquals(1,vehicle.getSpotNumber());
         }catch(ParkingLotException e){
 
         }
@@ -313,8 +313,8 @@ public class ParkingLotServiceTest {
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
             Vehicle vehicle=parkingLot.unParkTheVehicle(new Vehicle("KA04HB124",Driver.NORMAL,VehicleSize.SMALL,
                     Vehicle.VehicleColor.BLACK,Vehicle.VehicleName.MARUTI));
-            Assert.assertEquals(2,vehicle.getLotNumber());
             Assert.assertEquals(2,vehicle.getSlotNumber());
+            Assert.assertEquals(2,vehicle.getSpotNumber());
         }catch(ParkingLotException e){
 
         }
