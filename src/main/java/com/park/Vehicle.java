@@ -52,7 +52,7 @@ public class Vehicle {
     }
 
     public String getVehicleLocation(){
-        return Integer.toString(this.slotNumber)+"_"+Integer.toString(this.spotNumber);
+        return Integer.toString(this.getSlotNumber())+"_"+Integer.toString(this.getSpotNumber());
     }
 
     public VehicleSize getVehicleSize() {

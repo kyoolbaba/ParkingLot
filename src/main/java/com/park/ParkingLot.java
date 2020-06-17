@@ -115,11 +115,19 @@ public class ParkingLot  {
         return this;
     }
 
-    public ParkingLot selectBySlotNumber(int slotNumber){
+    public ParkingLot selectBySpotNumber(int spotNumber){
         totalVehiclesPresent=totalVehiclesPresent.stream().filter(slotNum->slotNum
-                .getSpotNumber()==slotNumber).collect(Collectors.toList());
+                .getSpotNumber()==spotNumber).collect(Collectors.toList());
         return this;
     }
+
+    public ParkingLot selectBySlotNumber(int slotNumber){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(slotNum->slotNum
+                .getSlotNumber()==slotNumber).collect(Collectors.toList());
+        return this;
+    }
+
+
 
     public ParkingLot selectByDriverType(Driver driverType){
         totalVehiclesPresent=totalVehiclesPresent.stream().

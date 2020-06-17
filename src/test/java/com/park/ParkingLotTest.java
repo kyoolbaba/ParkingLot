@@ -263,7 +263,6 @@ public class ParkingLotTest {
             Assert.assertEquals("KA04HL1054",listOfVehiclesParkedIn30Minutes.get(1).getVehicleNumber());
             Assert.assertEquals("KA04HB124",listOfVehiclesParkedIn30Minutes.get(0).getVehicleNumber());
             Assert.assertEquals(3,listOfVehiclesParkedIn30Minutes.size());
-
         }
 
     @Test
@@ -307,9 +306,9 @@ public class ParkingLotTest {
         listOfVehiclesPresent.add(vehicle9);
         when(parkingSlot.getVehicleDetails()).thenReturn(listOfVehiclesPresent);
         List<Vehicle> listOfVehiclesPresentAtBSlot =parkingLot.getDetails().
-                    selectBySize(2).selectBySlotNumber(2).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
+                    selectBySize(2).selectBySpotNumber(2).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
         List<Vehicle> listOfVehiclesPresentAtDSlot =parkingLot.getDetails().
-                    selectBySize(2).selectBySlotNumber(4).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
+                    selectBySize(2).selectBySpotNumber(4).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
         Assert.assertEquals(1,listOfVehiclesPresentAtDSlot.size());
         Assert.assertEquals(3,listOfVehiclesPresentAtBSlot.size());
         Assert.assertEquals("KA04HL1025",listOfVehiclesPresentAtDSlot.get(0).getVehicleNumber());

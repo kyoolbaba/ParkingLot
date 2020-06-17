@@ -511,9 +511,9 @@ public class ParkingLotServiceTest {
             parkingLot.parkTheVehicle(new Vehicle("KA02HL1027",Driver.HANDICAPPED,VehicleSize.MEDIUM,
             Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW));
             List<Vehicle> listOfVehiclesPresentAtBSlot =parkingLot.getDetails().
-                    selectBySize(2).selectBySlotNumber(1).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
+                    selectBySize(2).selectBySpotNumber(1).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
             List<Vehicle> listOfVehiclesPresentAtDSlot =parkingLot.getDetails().
-                    selectBySize(2).selectBySlotNumber(4).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
+                    selectBySize(2).selectBySpotNumber(4).selectByDriverType(Driver.HANDICAPPED).totalVehiclesPresent;
 //            Assert.assertEquals("KA03HL1027",listOfVehiclesPresentAtDSlot.get(0).getVehicleNumber());
         //    Assert.assertEquals("KA04HL127",listOfVehiclesPresentAtBSlot.get(0).getVehicleNumber());
            // Assert.assertEquals("KA04KL1027",listOfVehiclesPresentAtBSlot.get(1).getVehicleNumber());
@@ -528,40 +528,43 @@ public class ParkingLotServiceTest {
     @Test
     public void givenVehicleWithName_whenQueried_shouldReturnAllVehicles() {
         try {
-            ParkingLot lot1 = new ParkingLot(2,1,5);
-            ParkingLot lot2 = new ParkingLot(2,1,6);
-            ParkingLot lot3 = new ParkingLot(1,1);
+            ParkingLot lot1 = new ParkingLot(3,1,2,3);
+            ParkingLot lot2 = new ParkingLot(4,1,2,2,1);
+            ParkingLot lot3 = new ParkingLot(3,1,2,3);
             ArrayList parkingLots = new ArrayList();
             parkingLots.add(lot1);
             parkingLots.add(lot2);
             parkingLots.add(lot3);
             ParkingLot parkingLot = new ParkingLot(parkingLots);
-            parkingLot.parkTheVehicle(new Vehicle("KA04HB124",Driver.HANDICAPPED,VehicleSize.SMALL,
+            parkingLot.parkTheVehicle(new Vehicle("KA04HB124",Driver.NORMAL,VehicleSize.SMALL,
             Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.MARUTI));
-            parkingLot.parkTheVehicle(new Vehicle("KA04HL1054",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA04HL1054",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.MARUTI));
-            parkingLot.parkTheVehicle(new Vehicle("KA04HL1025",Driver.HANDICAPPED,VehicleSize.MEDIUM
+            parkingLot.parkTheVehicle(new Vehicle("KA04HL1025",Driver.NORMAL,VehicleSize.MEDIUM
                     ,Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.MARUTI));
-            parkingLot.parkTheVehicle(new Vehicle("KA04HL1026",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA04HL1026",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.MARUTI));
-            parkingLot.parkTheVehicle(new Vehicle("KA04HL1027",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA04HL1027",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.MARUTI));
-            parkingLot.parkTheVehicle(new Vehicle("KA04HL107",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA04HL107",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.MARUTI));
-            parkingLot.parkTheVehicle(new Vehicle("KA04HL127",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA04HL127",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.MARUTI));
-            parkingLot.parkTheVehicle(new Vehicle("KA04HL1037",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA04HL1037",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.TOYOTA));
-            parkingLot.parkTheVehicle(new Vehicle("KA04HL1327",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA04HL1327",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.TOYOTA));
-            parkingLot.parkTheVehicle(new Vehicle("KA04KL1027",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA04KL1027",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.TOYOTA));
-            parkingLot.parkTheVehicle(new Vehicle("KA03HL1027",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA03HL1027",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.TOYOTA));
-            parkingLot.parkTheVehicle(new Vehicle("KA02HL1027",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+            parkingLot.parkTheVehicle(new Vehicle("KA02HL1027",Driver.NORMAL,VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.GREEN,Vehicle.VehicleName.TOYOTA));
             List<Vehicle> listOfVehiclesPresent =parkingLot.getDetails().totalVehiclesPresent;
             Assert.assertEquals(12,listOfVehiclesPresent.size());
+            for (Vehicle vehicle : listOfVehiclesPresent){
+                System.out.println(vehicle.getVehicleLocation()+" "+vehicle.getVehicleSize().getSize()+vehicle.getVehicleNumber());
+            }
         }catch(ParkingLotException e){
         }
     }

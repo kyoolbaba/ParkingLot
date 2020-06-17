@@ -21,7 +21,6 @@ public class ParkingSpot {
                         slots[i+1]==0){
                     vehicle.setSpotNumber(i+1);
                     slots[i] +=vehicle.getVehicleSize().getSize();
-                    vehicle.setSpotNumber(i+1);
                     break;
                 }
             }

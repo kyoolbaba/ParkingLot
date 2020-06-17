@@ -491,18 +491,17 @@ public class ParkingSlotTest {
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
             slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB1603", Driver.NORMAL, VehicleSize.MEDIUM,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            ParkingLot slot3 = new ParkingLot(1, 1);
+            ParkingLot slot3 = new ParkingLot(1, 4);
             slot3.listOfVehiclesInSlot.add(new Vehicle("KA04HB160", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            slot1.slots=new int[]{0,1,2};
+            slot1.slots=new int[]{2,1,2};
             slot2.slots=new int[]{2,2,0};
             slot3.slots=new int[]{1};
             listOfParkingLots.add(slot1);
             listOfParkingLots.add(slot2);
             listOfParkingLots.add(slot3);
             ParkingSlot parkingSlot = new ParkingSlot(listOfParkingLots);
-            List list=parkingSlot.shuffle(new Vehicle("KA04HN456"));
-            list.stream().forEach(System.out::println);
+            //System.out.println(parkingSlot.shuffle());
         }catch(ParkingLotException e ){}
     }
 }
