@@ -477,4 +477,32 @@ public class ParkingSlotTest {
         }catch(ParkingLotException e){}
     }
 
+    @Test
+    public void givenVehicleDetails_whenAdded_shouldReturnLotForShuffle() {
+        try {
+            List<ParkingLot> listOfParkingLots = new ArrayList();
+            ParkingLot slot1 = new ParkingLot(3, 1,1, 2);
+            slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1234", Driver.NORMAL, VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            slot1.listOfVehiclesInSlot.add(new Vehicle("KA04H1234", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            ParkingLot slot2 = new ParkingLot(3, 2, 2, 1);
+            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB063", Driver.NORMAL, VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB1603", Driver.NORMAL, VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            ParkingLot slot3 = new ParkingLot(1, 1);
+            slot3.listOfVehiclesInSlot.add(new Vehicle("KA04HB160", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            slot1.slots=new int[]{0,1,2};
+            slot2.slots=new int[]{2,2,0};
+            slot3.slots=new int[]{1};
+            listOfParkingLots.add(slot1);
+            listOfParkingLots.add(slot2);
+            listOfParkingLots.add(slot3);
+            ParkingSlot parkingSlot = new ParkingSlot(listOfParkingLots);
+            List list=parkingSlot.shuffle(new Vehicle("KA04HN456"));
+            list.stream().forEach(System.out::println);
+        }catch(ParkingLotException e ){}
+    }
 }

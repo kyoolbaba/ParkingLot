@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.park.ParkingSlotTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2020-06-17T10:33:53" hostname="KYOOLBABA" time="0.038">
+<testsuite name="com.park.ParkingSlotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-17T14:00:22" hostname="KYOOLBABA" time="0.028">
   <properties/>
-  <testcase name="givenLotDetails_whenAdded_shouldReturnParkingNotFull" classname="com.park.ParkingSlotTest" time="0.02"/>
-  <testcase name="givenListOfParkingLots_whenParking_ShouldReturnLottPositiveTesting" classname="com.park.ParkingSlotTest" time="0.002"/>
-  <testcase name="givenListOfParkingLots_whenSearched_ShouldReturnLotAndSlotOfVehiclePositiveTesting" classname="com.park.ParkingSlotTest" time="0.0"/>
-  <testcase name="givenListOfParkingLots_whenSearched_ShouldReturnLotAndSlotOfVehicleNegativeTesting" classname="com.park.ParkingSlotTest" time="0.0"/>
-  <testcase name="givenLotDetails_whenAdded_shouldReturnTotalSpotsPresent" classname="com.park.ParkingSlotTest" time="0.001"/>
-  <testcase name="givenListOfParkingLots_whenParkedSameCarTwice_ShouldReturnTruePositiveTesting" classname="com.park.ParkingSlotTest" time="0.001"/>
-  <testcase name="givenLotDetails_whenAdded_shouldReturnParkingFull" classname="com.park.ParkingSlotTest" time="0.001"/>
-  <testcase name="givenListOfParkingLots_whenSearched_ShouldReturnVehiclesPresent" classname="com.park.ParkingSlotTest" time="0.001"/>
-  <testcase name="givenListOfParkingLots_whenParkedSameCarTwice_ShouldReturnTrueNegativeTesting" classname="com.park.ParkingSlotTest" time="0.001"/>
-  <testcase name="givenLargeVehicle_whenParked_shouldReturnLastSlotEmpty" classname="com.park.ParkingSlotTest" time="0.002"/>
-  <testcase name="givenListOfParkingLots_whenParking_ShouldReturnLotPositiveTesting" classname="com.park.ParkingSlotTest" time="0.0"/>
-  <testcase name="givenListOfParkingLots_whenParking_ShouldReturnLotNegativeTesting" classname="com.park.ParkingSlotTest" time="0.001"/>
-  <testcase name="givenLargeVehicle_whenParked_shouldReturnFirstSlotEmpty" classname="com.park.ParkingSlotTest" time="0.0"/>
-  <testcase name="givenListOfParkingLots_whenParkingIsFull_ShouldReturnTruePositiveTesting" classname="com.park.ParkingSlotTest" time="0.0"/>
-  <testcase name="givenLargeVehicle_whenParked_shouldReturnSecludedLotNumber" classname="com.park.ParkingSlotTest" time="0.0"/>
-  <testcase name="givenListOfParkingLots_whenParkingIsFull_ShouldReturnTrueNegativeTesting" classname="com.park.ParkingSlotTest" time="0.001"/>
-  <testcase name="givenListOfParkingLots_whenParking_ShouldReturnLotTestNegativeTesting" classname="com.park.ParkingSlotTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="givenVehicleDetails_whenAdded_shouldReturnLotForShuffle" classname="com.park.ParkingSlotTest" time="0.028"/>
+  <system-out><![CDATA[1
+2
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
