@@ -402,4 +402,79 @@ public class ParkingSlotTest {
         }catch(ParkingLotException e){}
     }
 
+    @Test
+    public void givenLotDetails_whenAdded_shouldReturnTotalSpotsPresent() {
+        try {
+            List<ParkingLot> listOfParkingLots = new ArrayList();
+            ParkingLot slot1 = new ParkingLot(5, 3, 3,3,3,1);
+            slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1234", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            slot1.slots=new int[]{2,0,1,0,2};
+            ParkingLot slot2 = new ParkingLot(4, 2, 2, 3, 1);
+            slot2.slots=new int[]{0,0,1,0};
+            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB163", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            ParkingLot slot3 = new ParkingLot(4, 4, 2, 3, 1);
+            slot3.slots=new int[]{0,2,0,1};
+            listOfParkingLots.add(slot1);
+            listOfParkingLots.add(slot2);
+            listOfParkingLots.add(slot3);
+            ParkingSlot parkingSlot = new ParkingSlot(listOfParkingLots);
+            Assert.assertEquals(31, parkingSlot.totalSpotsPresent);
+        }catch(ParkingLotException e){}
+    }
+
+
+    @Test
+    public void givenLotDetails_whenAdded_shouldReturnParkingFull() {
+        try {
+            List<ParkingLot> listOfParkingLots = new ArrayList();
+            ParkingLot slot1 = new ParkingLot(2, 1,2);
+            slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1234", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1034", Driver.NORMAL, VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            ParkingLot slot2 = new ParkingLot(3, 2, 2, 1);
+            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB063", Driver.NORMAL, VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB1603", Driver.NORMAL, VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB160", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            ParkingLot slot3 = new ParkingLot(1, 1);
+            slot3.listOfVehiclesInSlot.add(new Vehicle("KA04HB160", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            listOfParkingLots.add(slot1);
+            listOfParkingLots.add(slot2);
+            listOfParkingLots.add(slot3);
+            ParkingSlot parkingSlot = new ParkingSlot(listOfParkingLots);
+            Assert.assertTrue(parkingSlot.checkParkingFullOrNot());
+        }catch(ParkingLotException e){}
+    }
+
+    @Test
+    public void givenLotDetails_whenAdded_shouldReturnParkingNotFull() {
+        try {
+            List<ParkingLot> listOfParkingLots = new ArrayList();
+            ParkingLot slot1 = new ParkingLot(2, 1,2);
+            slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1234", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            ParkingLot slot2 = new ParkingLot(3, 2, 2, 1);
+            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB063", Driver.NORMAL, VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB1603", Driver.NORMAL, VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB160", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            ParkingLot slot3 = new ParkingLot(1, 1);
+            slot3.listOfVehiclesInSlot.add(new Vehicle("KA04HB160", Driver.NORMAL, VehicleSize.SMALL,
+                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
+            listOfParkingLots.add(slot1);
+            listOfParkingLots.add(slot2);
+            listOfParkingLots.add(slot3);
+            ParkingSlot parkingSlot = new ParkingSlot(listOfParkingLots);
+            Assert.assertFalse(parkingSlot.checkParkingFullOrNot());
+        }catch(ParkingLotException e){}
+    }
+
 }

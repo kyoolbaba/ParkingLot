@@ -9,6 +9,7 @@ public class ParkingSlot {
     private List<ParkingLot> slotDetailsList;
     private int slotNumber;
     ParkingLot parkingLot;
+    int totalSpotsPresent;
 
     public int getSlotNumber() {
         return slotNumber;
@@ -16,6 +17,7 @@ public class ParkingSlot {
 
     public ParkingSlot(List<ParkingLot> slotDetailsList) {
         this.slotDetailsList = slotDetailsList;
+        this.totalSpotsPresent=slotDetailsList.stream().mapToInt(spots->spots.sizeOfParkingLot).sum();
     }
 
     public ParkingSlot() {
@@ -26,8 +28,8 @@ public class ParkingSlot {
     }
 
     public boolean checkParkingFullOrNot(){
-        return slotDetailsList.stream().allMatch(listOfVehiclesInLot->listOfVehiclesInLot.
-                listOfVehiclesInSlot.size()==listOfVehiclesInLot.sizeOfParkingLot);
+        return this.getVehicleDetails().stream().mapToInt
+                (sizeOfVehicles->sizeOfVehicles.getVehicleSize().getSize()).sum()==totalSpotsPresent;
     }
 
     public ParkingLot assignSlot(Vehicle vehicle) throws ParkingLotException {
@@ -81,7 +83,7 @@ public class ParkingSlot {
         return parkingLot;
     }
 
-    public List getVehicleDetails(){
+    public List<Vehicle> getVehicleDetails(){
         List<Vehicle> listOfVehicles=new ArrayList<>();
         for(ParkingLot park: slotDetailsList){
             listOfVehicles.addAll( park.listOfVehiclesInSlot.stream().

@@ -25,8 +25,7 @@ public class ParkingSpot {
                     break;
                 }
             }
-        }
-        else  if(vehicle.getDriver().equals(Driver.NORMAL)){
+        } else  if(vehicle.getDriver().equals(Driver.NORMAL)){
                     for( i=slots.length-1;i>=0;i--){
                         if(slots[i]!=slotCapacity[i]&&(slotCapacity[i]>=(slots[i]+vehicle.getVehicleSize().getSize()))){
                             vehicle.setSpotNumber(i+1);
@@ -43,9 +42,6 @@ public class ParkingSpot {
                 }
             }
         }
-
-
-
     }
 
 }
