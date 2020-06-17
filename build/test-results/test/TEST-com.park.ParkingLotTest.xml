@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.park.ParkingLotTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2020-06-17T08:41:56" hostname="KYOOLBABA" time="0.748">
+  <properties/>
+  <testcase name="givenVehiclesDetailsNull_whenUnparked_shouldThrowException" classname="com.park.ParkingLotTest" time="0.65"/>
+  <testcase name="givenListOfVehicles_whenSearchedByBMW_shouldReturnMatchingCars" classname="com.park.ParkingLotTest" time="0.034"/>
+  <testcase name="givenListOfVehicles_whenSearchedByWhiteColor_shouldReturnMatchingCars" classname="com.park.ParkingLotTest" time="0.004"/>
+  <testcase name="givenVehicle_whenParkedTheVehicle_ShouldAddTheVehicleIntheSlot" classname="com.park.ParkingLotTest" time="0.016"/>
+  <testcase name="givenVehicleDetails_whenUnparked_shouldReturnVehiclesDetails" classname="com.park.ParkingLotTest" time="0.006"/>
+  <testcase name="givenVehicleObjectNull_whenAdded_shouldThrowException" classname="com.park.ParkingLotTest" time="0.002"/>
+  <testcase name="givenVehicleNumberEmpty_whenAdded_shouldThrowException" classname="com.park.ParkingLotTest" time="0.002"/>
+  <testcase name="givenVehicleWithName_whenQueried_shouldReturnCarParkedInLast30mins" classname="com.park.ParkingLotTest" time="0.008"/>
+  <testcase name="givenVehicleWithName_whenQueried_shouldReturnVehiclesOfSlot2" classname="com.park.ParkingLotTest" time="0.004"/>
+  <testcase name="givenListOfVehicles_whenSearched_shouldReturnTotalVehiclesPresent" classname="com.park.ParkingLotTest" time="0.002"/>
+  <testcase name="givenVehicleNumberNull_whenAdded_shouldThrowException" classname="com.park.ParkingLotTest" time="0.001"/>
+  <testcase name="givenVehiclesDetailsEmpty_whenUnparked_shouldThrowException" classname="com.park.ParkingLotTest" time="0.002"/>
+  <testcase name="givenListOfVehicles_whenSearchedByColorAndBrand_shouldReturnMatchingCars" classname="com.park.ParkingLotTest" time="0.002"/>
+  <testcase name="givenVehiclesObjectAsNull_whenUnparked_shouldThrowException" classname="com.park.ParkingLotTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

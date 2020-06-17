@@ -2,12 +2,6 @@ package com.park;
 
 public class ParkingSpot {
 
-    ParkingLotService parkingLotService;
-
-    public ParkingSpot(ParkingLotService parkingLotService) {
-        this.parkingLotService = parkingLotService;
-    }
-
     public ParkingSpot() { }
 
     public void assignLotNumber(int[] slots, Vehicle vehicle, Integer[] slotCapacity){
