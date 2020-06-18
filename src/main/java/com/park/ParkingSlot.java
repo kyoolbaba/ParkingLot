@@ -104,7 +104,7 @@ public class ParkingSlot {
                             break;
                         }
                     }
-                    park.spotCapacity[i]=vehicle.getVehicleSize().getSize();
+                    park.spotCapacity[i]+=vehicle.getVehicleSize().getSize();
                     vehicle.setSlotNumber(j+1);
                     vehicle.setSpotNumber(i+1);
                     break;
@@ -116,8 +116,9 @@ public class ParkingSlot {
             if(maxSize!=1){
                 for(Vehicle replaceVehcle: vehiclesRemoved){
                     if(replaceVehcle.getVehicleSize().getSize()==maxSize){
-                        this.shuffle(replaceVehcle);
                         vehiclesRemoved.remove(replaceVehcle);
+                        this.shuffle(replaceVehcle);
+
                     }
                 }
             }
@@ -127,6 +128,11 @@ public class ParkingSlot {
             }
             for(Vehicle vehiclesGotFromShuffle:vehiclesRemoved){
                 parkingLot=new ParkingLot(slotList);
+                for(ParkingLot parking:slotList){
+                   if( parking.listOfVehiclesInSlot.contains(vehiclesGotFromShuffle)){
+                       parking.listOfVehiclesInSlot.remove(vehiclesGotFromShuffle);
+                   }
+                }
                 parkingLot.parkTheVehicle(vehiclesGotFromShuffle);
                 //System.out.println(vehiclesGotFromShuffle.getVehicleNumber());
             }

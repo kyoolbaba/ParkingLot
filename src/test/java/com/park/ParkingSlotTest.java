@@ -552,11 +552,14 @@ public class ParkingSlotTest {
             listOfSlots.add(parkingLot2);
             ParkingSlot parkingSlot=new ParkingSlot(listOfSlots);
             parkingSlot.shuffle(vehicle5);
-            Assert.assertEquals(2,vehicle1.getSlotNumber());
-            Assert.assertEquals(1,vehicle1.getSlotNumber());
+            Assert.assertEquals(1,vehicle2.getSlotNumber());
+            Assert.assertEquals(2,vehicle2.getSpotNumber());
             Assert.assertEquals(1,vehicle5.getSlotNumber());
             Assert.assertEquals(1,vehicle5.getSpotNumber());
-        }catch(ParkingLotException e ){}
+        }catch(ParkingLotException e ){
+            Assert.assertEquals(ParkingLotException.ExceptionType.INCOMPLETE_DETAILS,e.type);
+        }
     }
+
 
 }
