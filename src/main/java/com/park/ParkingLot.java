@@ -127,6 +127,12 @@ public class ParkingLot  {
         return this;
     }
 
+    public ParkingLot selectVehiclesSizeByLimit(int slotNumber){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(slotNum->slotNum
+                .getSlotNumber()<slotNumber).collect(Collectors.toList());
+        return this;
+    }
+
 
 
     public ParkingLot selectByDriverType(Driver driverType){

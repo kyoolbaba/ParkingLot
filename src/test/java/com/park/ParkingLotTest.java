@@ -315,11 +315,12 @@ public class ParkingLotTest {
         Assert.assertEquals("KA04HL127",listOfVehiclesPresentAtBSlot.get(0).getVehicleNumber());
         Assert.assertEquals("KA04HL1327",listOfVehiclesPresentAtBSlot.get(1).getVehicleNumber());
         Assert.assertEquals("KA04HL1054",listOfVehiclesPresentAtBSlot.get(2).getVehicleNumber());
-
-
     }
 
+    @Test
+    public void givenVehicleOfLargeSize_whenParkingSpaceNotAvailable_shouldReturnShuffledList() {
 
+    }
 }
 
 

@@ -11,6 +11,7 @@ public class ParkingSlot {
     ParkingLot parkingLot;
     int totalSpotsPresent;
     ArrayList<Vehicle> vehiclesRemoved = new ArrayList<>();
+    List<Vehicle> totalVehiclesPresent;
 
     public int getSlotNumber() {
         return slotNumber;
@@ -81,14 +82,22 @@ public class ParkingSlot {
         List<ParkingLot> restoreCheckPoint=slotList;
         for(int j=slotList.size()-1;j>=0;j--){
             ParkingLot park=slotList.get(j);
-            int sizeTobeRecovered=0;
-            for(int i = park.spotCapacity[park.spots.length-1]; i>=0; i++){
-                if(park.spotCapacity[i]>=vehicle.getVehicleSize().getSize()&&park.getDetails().selectBySlotNumber(i+1)
-                        .selectBySpotNumber(j+1).totalVehiclesPresent.get(0).getVehicleSize().getSize()!=vehicle.getVehicleSize().getSize()){
-                    sizeTobeRecovered+=park.spotCapacity[i]-park.spots[j];
-                    for(Vehicle vehiclesToRemove:park.getDetails().selectBySlotNumber(i+1)
-                            .selectBySpotNumber(j+1).totalVehiclesPresent){
+            for(int i = park.spotCapacity[park.spots.length-1]; i>=0; i--){
+                int sizeTobeRecovered=0;
+                if(park.spotCapacity[i]>=vehicle.getVehicleSize().getSize()){
+                    sizeTobeRecovered+=park.spotCapacity[i]-park.spots[i];
+                    List<Vehicle> listToBeRemoved=this.getDetails().selectBySlotNumber(j+1)
+                            .selectBySpotNumber(i+1).selectVehiclesSizeByLimit(vehicle.getVehicleSize().getSize())
+                            .totalVehiclesPresent;
+                    if(listToBeRemoved.stream().mapToInt(v->v.getVehicleSize().getSize()).sum()+sizeTobeRecovered
+                            <vehicle.getVehicleSize().getSize()){
+                        continue;
+                    }
+                    for(Vehicle vehiclesToRemove:this.getDetails().selectBySlotNumber(j+1)
+                            .selectBySpotNumber(i+1).selectVehiclesSizeByLimit(vehicle.getVehicleSize().getSize())
+                            .totalVehiclesPresent){
                         vehiclesRemoved.add(vehiclesToRemove);
+                        park.spots[i]-=vehiclesToRemove.getVehicleSize().getSize();
                         sizeTobeRecovered+=vehiclesToRemove.getVehicleSize().getSize();
                         park.listOfVehiclesInSlot.remove(vehiclesToRemove);
                         if(sizeTobeRecovered>=vehicle.getVehicleSize().getSize()){
@@ -96,11 +105,13 @@ public class ParkingSlot {
                         }
                     }
                     park.spotCapacity[i]=vehicle.getVehicleSize().getSize();
-                    vehicle.setSlotNumber(i+1);
-                    vehicle.setSpotNumber(j+1);
+                    vehicle.setSlotNumber(j+1);
+                    vehicle.setSpotNumber(i+1);
                     break;
                 }
             }
+            if(vehiclesRemoved.size()==0)
+                continue;
             int maxSize= vehiclesRemoved.stream().mapToInt(v->v.getVehicleSize().getSize()).max().getAsInt();
             if(maxSize!=1){
                 for(Vehicle replaceVehcle: vehiclesRemoved){
@@ -115,11 +126,12 @@ public class ParkingSlot {
                 throw new ParkingLotException("Parking Not available",ParkingLotException.ExceptionType.PARKING_SIZE_NOT_AVAILABLE);
             }
             for(Vehicle vehiclesGotFromShuffle:vehiclesRemoved){
+                parkingLot=new ParkingLot(slotList);
                 parkingLot.parkTheVehicle(vehiclesGotFromShuffle);
+                //System.out.println(vehiclesGotFromShuffle.getVehicleNumber());
             }
         }
-
-        }
+    }
 
 
 
@@ -143,5 +155,61 @@ public class ParkingSlot {
         }
         return listOfVehicles;
     }
+
+    public ParkingSlot getDetails() {
+        totalVehiclesPresent= this.getVehicleDetails();
+        return this;
+    }
+
+    public ParkingSlot selectByColor(Vehicle.VehicleColor vehicleColor) {
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(color->color.getVehicleColor()
+                .equals(vehicleColor)).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingSlot selectByName(Vehicle.VehicleName vehicleName){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(name->name.getVehicleName()
+                .equals(vehicleName)).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingSlot selectByDuration(int withIn){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(time->time
+                .getDuration()<=withIn).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingSlot selectBySpotNumber(int spotNumber){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(slotNum->slotNum
+                .getSpotNumber()==spotNumber).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingSlot selectBySlotNumber(int slotNumber){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(slotNum->slotNum
+                .getSlotNumber()==slotNumber).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingSlot selectVehiclesSizeByLimit(int slotNumber){
+        totalVehiclesPresent=totalVehiclesPresent.stream().filter(slotNum->slotNum
+                .getSlotNumber()<slotNumber).collect(Collectors.toList());
+        return this;
+    }
+
+
+
+    public ParkingSlot selectByDriverType(Driver driverType){
+        totalVehiclesPresent=totalVehiclesPresent.stream().
+                filter(type->type.getDriver().equals(driverType)).collect(Collectors.toList());
+        return this;
+    }
+
+    public ParkingSlot selectBySize(int size){
+        totalVehiclesPresent=totalVehiclesPresent.stream().
+                filter(sizeOfVehicle->sizeOfVehicle.getVehicleSize().getSize()==size).collect(Collectors.toList());
+        return this;
+    }
+
 
 }

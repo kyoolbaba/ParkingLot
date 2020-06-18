@@ -480,28 +480,83 @@ public class ParkingSlotTest {
     @Test
     public void givenVehicleDetails_whenAdded_shouldReturnLotForShuffle() {
         try {
-            List<ParkingLot> listOfParkingLots = new ArrayList();
-            ParkingLot slot1 = new ParkingLot(3, 1,1, 2);
-            slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1234", Driver.NORMAL, VehicleSize.MEDIUM,
-                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            slot1.listOfVehiclesInSlot.add(new Vehicle("KA04H1234", Driver.NORMAL, VehicleSize.SMALL,
-                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            ParkingLot slot2 = new ParkingLot(3, 2, 2, 1);
-            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB063", Driver.NORMAL, VehicleSize.MEDIUM,
-                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB1603", Driver.NORMAL, VehicleSize.MEDIUM,
-                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            ParkingLot slot3 = new ParkingLot(1, 4);
-            slot3.listOfVehiclesInSlot.add(new Vehicle("KA04HB160", Driver.NORMAL, VehicleSize.SMALL,
-                    Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            slot1.spots =new int[]{2,1,2};
-            slot2.spots =new int[]{2,2,0};
-            slot3.spots =new int[]{1};
-            listOfParkingLots.add(slot1);
-            listOfParkingLots.add(slot2);
-            listOfParkingLots.add(slot3);
-            ParkingSlot parkingSlot = new ParkingSlot(listOfParkingLots);
-            //System.out.println(parkingSlot.shuffle());
+            List<ParkingLot> listOfSlots=new ArrayList<>();
+            Vehicle vehicle1=new Vehicle("KA04HL1027",Driver.NORMAL,VehicleSize.LARGE,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW);
+            Vehicle vehicle2=new Vehicle("KA04HL107",Driver.NORMAL,VehicleSize.SMALL,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW);
+            Vehicle vehicle3=(new Vehicle("KA04HL127",Driver.HANDICAPPED,VehicleSize.SMALL,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW));
+            Vehicle vehicle4=(new Vehicle("KA04HL1037",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW));
+            Vehicle vehicle5=(new Vehicle("KA04HL1327",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW));
+            vehicle1.setSpotNumber(1);
+            vehicle2.setSpotNumber(2);
+            vehicle3.setSpotNumber(3);
+            vehicle4.setSpotNumber(1);
+            vehicle1.setSlotNumber(1);
+            vehicle2.setSlotNumber(1);
+            vehicle3.setSlotNumber(1);
+            vehicle4.setSlotNumber(2);
+            ParkingLot parkingLot1=new ParkingLot(3,3,2,1);
+            ParkingLot parkingLot2=new ParkingLot(2,2,1);
+            parkingLot1.spots =new int[]{3,1,1};
+            parkingLot2.spots =new int[]{2,0};
+            parkingLot1.listOfVehiclesInSlot.add(vehicle1);
+            parkingLot1.listOfVehiclesInSlot.add(vehicle2);
+            parkingLot1.listOfVehiclesInSlot.add(vehicle3);
+            parkingLot2.listOfVehiclesInSlot.add(vehicle4);
+            listOfSlots.add(parkingLot1);
+            listOfSlots.add(parkingLot2);
+            ParkingSlot parkingSlot=new ParkingSlot(listOfSlots);
+            parkingSlot.shuffle(vehicle5);
+            Assert.assertEquals(2,vehicle2.getSlotNumber());
+            Assert.assertEquals(2,vehicle2.getSlotNumber());
+            Assert.assertEquals(1,vehicle5.getSlotNumber());
+            Assert.assertEquals(2,vehicle5.getSpotNumber());
         }catch(ParkingLotException e ){}
     }
+
+    @Test
+    public void givenVehicleDetails_whenAddedLargeVehicles_shouldReturnLotForShuffle() {
+        try {
+            List<ParkingLot> listOfSlots=new ArrayList<>();
+            Vehicle vehicle1=new Vehicle("KA04HL1027",Driver.NORMAL,VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW);
+            Vehicle vehicle2=new Vehicle("KA04HL107",Driver.NORMAL,VehicleSize.SMALL,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW);
+            Vehicle vehicle3=(new Vehicle("KA04HL127",Driver.HANDICAPPED,VehicleSize.SMALL,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW));
+            Vehicle vehicle4=(new Vehicle("KA04HL1037",Driver.HANDICAPPED,VehicleSize.MEDIUM,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW));
+            Vehicle vehicle5=(new Vehicle("KA04HL1327",Driver.HANDICAPPED,VehicleSize.LARGE,
+                    Vehicle.VehicleColor.RED,Vehicle.VehicleName.BMW));
+            vehicle1.setSpotNumber(1);
+            vehicle2.setSpotNumber(2);
+            vehicle3.setSpotNumber(3);
+            vehicle4.setSpotNumber(1);
+            vehicle1.setSlotNumber(1);
+            vehicle2.setSlotNumber(1);
+            vehicle3.setSlotNumber(1);
+            vehicle4.setSlotNumber(2);
+            ParkingLot parkingLot1=new ParkingLot(3,3,2,1);
+            ParkingLot parkingLot2=new ParkingLot(2,2,1);
+            parkingLot1.spots =new int[]{2,1,1};
+            parkingLot2.spots =new int[]{2,0};
+            parkingLot1.listOfVehiclesInSlot.add(vehicle1);
+            parkingLot1.listOfVehiclesInSlot.add(vehicle2);
+            parkingLot1.listOfVehiclesInSlot.add(vehicle3);
+            parkingLot2.listOfVehiclesInSlot.add(vehicle4);
+            listOfSlots.add(parkingLot1);
+            listOfSlots.add(parkingLot2);
+            ParkingSlot parkingSlot=new ParkingSlot(listOfSlots);
+            parkingSlot.shuffle(vehicle5);
+            Assert.assertEquals(2,vehicle1.getSlotNumber());
+            Assert.assertEquals(1,vehicle1.getSlotNumber());
+            Assert.assertEquals(1,vehicle5.getSlotNumber());
+            Assert.assertEquals(1,vehicle5.getSpotNumber());
+        }catch(ParkingLotException e ){}
+    }
+
 }
