@@ -337,13 +337,13 @@ public class ParkingSlotTest {
             ParkingLot slot1 = new ParkingLot(5, 3, 3,3,3,1);
             slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1234", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            slot1.slots=new int[]{2,0,0,0,2};
+            slot1.spots =new int[]{2,0,0,0,2};
             ParkingLot slot2 = new ParkingLot(4, 1, 2, 3, 1);
-            slot2.slots=new int[]{1,0,1,0};
+            slot2.spots =new int[]{1,0,1,0};
             slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB163", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
             ParkingLot slot3 = new ParkingLot(4, 1, 2, 3, 1);
-            slot3.slots=new int[]{1,2,0,1};
+            slot3.spots =new int[]{1,2,0,1};
             listOfParkingLots.add(slot1);
             listOfParkingLots.add(slot2);
             listOfParkingLots.add(slot3);
@@ -361,13 +361,13 @@ public class ParkingSlotTest {
             ParkingLot slot1 = new ParkingLot(5, 3, 3,3,3,1);
             slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1234", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            slot1.slots=new int[]{2,0,1,0,2};
+            slot1.spots =new int[]{2,0,1,0,2};
             ParkingLot slot2 = new ParkingLot(4, 1, 2, 3, 4);
-            slot2.slots=new int[]{1,0,1,0};
+            slot2.spots =new int[]{1,0,1,0};
             slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB163", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
             ParkingLot slot3 = new ParkingLot(4, 1, 2, 3, 1);
-            slot3.slots=new int[]{1,2,0,1};
+            slot3.spots =new int[]{1,2,0,1};
             listOfParkingLots.add(slot1);
             listOfParkingLots.add(slot2);
             listOfParkingLots.add(slot3);
@@ -385,13 +385,13 @@ public class ParkingSlotTest {
             ParkingLot slot1 = new ParkingLot(5, 3, 3,3,3,1);
             slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1234", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            slot1.slots=new int[]{2,0,1,0,2};
+            slot1.spots =new int[]{2,0,1,0,2};
             ParkingLot slot2 = new ParkingLot(4, 2, 2, 3, 1);
-            slot2.slots=new int[]{0,0,1,0};
+            slot2.spots =new int[]{0,0,1,0};
             slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB163", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
             ParkingLot slot3 = new ParkingLot(4, 4, 2, 3, 1);
-            slot3.slots=new int[]{0,2,0,1};
+            slot3.spots =new int[]{0,2,0,1};
             listOfParkingLots.add(slot1);
             listOfParkingLots.add(slot2);
             listOfParkingLots.add(slot3);
@@ -409,13 +409,13 @@ public class ParkingSlotTest {
             ParkingLot slot1 = new ParkingLot(5, 3, 3,3,3,1);
             slot1.listOfVehiclesInSlot.add(new Vehicle("KA04HB1234", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            slot1.slots=new int[]{2,0,1,0,2};
+            slot1.spots =new int[]{2,0,1,0,2};
             ParkingLot slot2 = new ParkingLot(4, 2, 2, 3, 1);
-            slot2.slots=new int[]{0,0,1,0};
+            slot2.spots =new int[]{0,0,1,0};
             slot2.listOfVehiclesInSlot.add(new Vehicle("KA04HB163", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
             ParkingLot slot3 = new ParkingLot(4, 4, 2, 3, 1);
-            slot3.slots=new int[]{0,2,0,1};
+            slot3.spots =new int[]{0,2,0,1};
             listOfParkingLots.add(slot1);
             listOfParkingLots.add(slot2);
             listOfParkingLots.add(slot3);
@@ -494,9 +494,9 @@ public class ParkingSlotTest {
             ParkingLot slot3 = new ParkingLot(1, 4);
             slot3.listOfVehiclesInSlot.add(new Vehicle("KA04HB160", Driver.NORMAL, VehicleSize.SMALL,
                     Vehicle.VehicleColor.WHITE, Vehicle.VehicleName.MARUTI));
-            slot1.slots=new int[]{2,1,2};
-            slot2.slots=new int[]{2,2,0};
-            slot3.slots=new int[]{1};
+            slot1.spots =new int[]{2,1,2};
+            slot2.spots =new int[]{2,2,0};
+            slot3.spots =new int[]{1};
             listOfParkingLots.add(slot1);
             listOfParkingLots.add(slot2);
             listOfParkingLots.add(slot3);

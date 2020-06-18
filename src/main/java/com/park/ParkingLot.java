@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 public class ParkingLot  {
      int sizeOfParkingLot;
      ParkingSpot parkingSpot;
-     Integer[] slotCapacity;
+     Integer[] spotCapacity;
      List<Vehicle> listOfVehiclesInSlot;
      List<Vehicle> totalVehiclesPresent;
-     int[] slots;
+     int[] spots;
      ParkingSlot parkingSlot;
 
 
@@ -27,8 +27,8 @@ public class ParkingLot  {
     public ParkingLot(int sizeOfParkingLot, Integer...slotCapacities) throws ParkingLotException {
         parkingSlot =new ParkingSlot();
         listOfVehiclesInSlot = new ArrayList();
-        slots =new int[sizeOfParkingLot];
-        slotCapacity =slotCapacities;
+        spots =new int[sizeOfParkingLot];
+        spotCapacity =slotCapacities;
         this.sizeOfParkingLot = Arrays.stream(slotCapacities).mapToInt(i->i).sum();
         if(sizeOfParkingLot!=slotCapacities.length)
             throw new ParkingLotException("Invalid ParkingLot Input"
@@ -45,7 +45,7 @@ public class ParkingLot  {
         if(this.isFull())
             throw new ParkingLotException("Parking Full",ParkingLotException.ExceptionType.PARKING_IS_FULL);
         ParkingLot vehicleToBeParkedInThisSlot= parkingSlot.assignSlot(vehicle);
-            parkingSpot.assignSpotNumber(vehicleToBeParkedInThisSlot.slots,vehicle,vehicleToBeParkedInThisSlot.slotCapacity);
+            parkingSpot.assignSpotNumber(vehicleToBeParkedInThisSlot.spots,vehicle,vehicleToBeParkedInThisSlot.spotCapacity);
         vehicle.setSlotNumber(parkingSlot.getSlotNumber()+1);
         vehicleToBeParkedInThisSlot.listOfVehiclesInSlot.add(vehicle);
         if(this.isFull()) {
@@ -68,7 +68,7 @@ public class ParkingLot  {
         Vehicle vehicleTobeUnparked=null;
         for(Vehicle vehicles:vehiclesParkedLot.listOfVehiclesInSlot){
             if(vehicles.equals(vehicle)){
-                vehiclesParkedLot.slots[vehicles.getSpotNumber()-1]= vehiclesParkedLot.slots[vehicles.getSpotNumber()-1]
+                vehiclesParkedLot.spots[vehicles.getSpotNumber()-1]= vehiclesParkedLot.spots[vehicles.getSpotNumber()-1]
                         -(1*vehicles.getVehicleSize().getSize());
                 vehicleTobeUnparked=vehicles;
                 vehiclesParkedLot.listOfVehiclesInSlot.remove(vehicles);

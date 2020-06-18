@@ -96,8 +96,8 @@ public class ParkingLotTest {
             listOfVehiclesInSlot.add(vehicle3);
             ParkingLot vehiclesSlot=new ParkingLot();
             vehiclesSlot.listOfVehiclesInSlot =listOfVehiclesInSlot;
-            vehiclesSlot.slots=new int[3];
-            vehiclesSlot.slotCapacity= new Integer[]{1,2,3};
+            vehiclesSlot.spots =new int[3];
+            vehiclesSlot.spotCapacity = new Integer[]{1,2,3};
             when(parkingSlot.checkVehiclePresent(new Vehicle("KA04HB021"))).thenReturn(true);
             when(parkingSlot.checkParkingFullOrNot()).thenReturn(false);
             when(parkingSlot.getSlotOfTheVehiclePresent(any(Vehicle.class))).thenReturn(vehiclesSlot);
